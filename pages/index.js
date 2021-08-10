@@ -7,7 +7,7 @@ import Discord from '../public/discord.svg'
 export default function Home() {
   return (
     <Layout>
-      <div className="flex items-center">
+      <div className="flex items-center py-80">
         <div className="w-64">
           <Image src={Logo} alt="Logo"/>
         </div>
