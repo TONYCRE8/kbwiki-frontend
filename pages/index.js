@@ -18,10 +18,10 @@ export default function Home() {
             <p>More details will be released soon.</p>
           </div>
           <a href="https://discord.gg/hM9BQ5mmsu" className="w-80 h-10 mt-16 flex justify-center rounded-full bg-purple-dark">
-              <div className="w-10 pt-1.5 mr-10">
+              <div className="w-10 pt-1 mr-10">
                 <Image src={Discord}></Image>
               </div>
-              <p className="uppercase font-nunito-black pt-2 text-lg">Join us on Discord!</p>
+              <p className="uppercase text-white font-nunito-black pt-2 text-lg">Join us on Discord!</p>
           </a>
         </div>
       </div>
