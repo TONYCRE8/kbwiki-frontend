@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import ValaIcon from '../public/vala'
+import Image from "next/image"
+import ValaIcon from "../public/vala"
 
 function Footer() {
     return (
