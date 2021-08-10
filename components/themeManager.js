@@ -27,7 +27,7 @@ function ThemeManager() {
                 }
                 `}
             </style>
-            <div className="absolute top-2 right-2">
+            <div className="absolute md:top-2 top-8 md:right-2 right-4">
                 <label className={
                     `relative inline-block w-12 h-6 ring-2 rounded-full transition-all duration-200 ${theme == 'dark' ? 'bg-white ring-white' : 'bg-gray-darkest ring-gray-darkest'}`
                     }>
