@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: 'nunito-black';
+    src: url(../fonts/Nunito-Black.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: 'inter-semibold';
+    src: url(../fonts/Inter-SemiBold.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: 'inter-regular';
+    src: url(../fonts/Inter-Regular.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: 'inter-thin';
+    src: url(../fonts/Inter-Thin.woff2) format('woff2');
+  }
+}
+
 html,
 body {
   padding: 0;

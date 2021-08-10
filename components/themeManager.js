@@ -29,7 +29,7 @@ function ThemeManager() {
             </style>
             <div className="absolute top-2 right-2">
                 <label className={
-                    `relative inline-block w-12 h-6 ring-2 rounded-full transition-all duration-200 ${theme == 'dark' ? 'bg-white ring-white' : 'bg-gray-800 ring-gray-800'}`
+                    `relative inline-block w-12 h-6 ring-2 rounded-full transition-all duration-200 ${theme == 'dark' ? 'bg-white ring-white' : 'bg-gray-darkest ring-gray-darkest'}`
                     }>
                     <input
                         type="checkbox"
@@ -39,7 +39,7 @@ function ThemeManager() {
                     />
                     <span className={
                         `absolute w-6 h-6 rounded-full transition-all duration-200 top-0 bottom-0
-                        ${theme == 'dark' ? 'left-0 right-0 bg-gray-800' : 'left-6 right-0 bg-white'}`
+                        ${theme == 'dark' ? 'left-0 right-0 bg-gray-darkest' : 'left-6 right-0 bg-white'}`
                     }></span>
                 </label>
             </div>
