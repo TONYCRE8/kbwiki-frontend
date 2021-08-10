@@ -42,3 +42,11 @@ a {
 h1, h2, h3, h4, h5, h6, p {
   color: var(--text-color)
 }
+
+h1 {
+  @apply font-nunito-black text-4xl;
+}
+
+p {
+  @apply font-inter-regular
+}
