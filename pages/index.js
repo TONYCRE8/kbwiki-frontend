@@ -30,8 +30,8 @@ export default function Home() {
         </div>
         <div className="md:ml-8 mt-4">
           <h1 className="uppercase md:text-6xl md:mb-8 mb-4 tracking-wider md:text-left text-center">Coming Soon!</h1>
-          <div className="border-l-8 border-solid rounded-md" style={{borderColor: "var(--primary-color)"}}>
-            <p className="p-4" style={{background: "var(--bg-accent)"}}>We&apos;re working hard on building this site.<br/>More details will be released soon.</p>
+          <div className="border-l-8 border-solid rounded-l-md my-4" style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
+            <p className="p-4">We&apos;re working hard on building this site.<br/>More details will be released soon.</p>
           </div>
           <a href="https://discord.gg/hM9BQ5mmsu" className="w-80 h-10 mt-16 flex justify-center rounded-full bg-purple-dark">
               <div className="w-10 pt-1 mr-10">
@@ -41,17 +41,17 @@ export default function Home() {
           </a>
         </div>
       </section>
-      <hr className="w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
-      <section className="flex flex-col w-4/5 justify-end items-end">
-        <h2 className="text-4xl md:text-right text-center mb-4">What is this project about?</h2>
-        <p className="md:text-right text-left md:mr-8">
+      <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
+      <section className="flex flex-col xl:w-3/5 w-4/5">
+        <h2 className="text-4xl md:text-left text-center mb-4">What is this project about?</h2>
+        <p className="text-left md:ml-8">
           This project aims to be the most comprehensive keyboard database on the internet.
           We plan on collecting all sorts of data about things like keycap sets, switches, keyboards, and other information all into one central hub.
           A lot of current databases around are either outdated, lacking older information, or simply lacking in features. We aim to provide a feature-rich product to house a repository of information.
         </p>
       </section>
-      <hr className="w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
-      <section className="flex flex-col w-4/5 justify-start items-start">
+      <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
+      <section className="flex flex-col xl:w-3/5 w-4/5">
         <h2 className="text-4xl md:text-left text-center mb-4">What can I expect to see?</h2>
         <div className="md:ml-8">
           <p>The beta will contain a selection of data collected over the months. In this we will aim to provide the following:</p>
@@ -62,7 +62,7 @@ export default function Home() {
               <li>The ability to search and filter by parameters such as color, type, profile, actuation, and more.</li>
             </ul>
           </div>
-          <p>After the beta has been out for a while and public reception has been gained, we will decide on whether there's enough support for the full version.<br />
+          <p>After the beta has been out for a while and public reception has been gained, we will decide on whether there&apos;s enough support for the full version.<br />
           In said full version, you can expect to see:</p>
           <div className="border-l-8 border-solid rounded-l-md my-4" style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
             <ul className="p-4">
@@ -73,13 +73,13 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <hr className="w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
-      <section className="flex flex-col w-4/5 mb-8 justify-start items-start">
-        <h2 className="text-4xl md:text-left text-center mb-4">What can you do?</h2>
-        <p className=" md:ml-8">
-          There's a bunch to be done. The best thing you can do is show your support! Join our Discord server, donate to the Ko-Fi if at all possible, and spread word about the project!
+      <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
+      <section className="flex flex-col xl:w-3/5 w-4/5 mb-8 justify-center items-center">
+        <h2 className="text-4xl text-center mb-4">What can you do?</h2>
+        <p className="text-center md:w-3/4">
+          There&apos;s a bunch to be done. The best thing you can do is show your support! Join our Discord server, donate to the Ko-Fi if at all possible, and spread word about the project!
         </p>
-        <p className="md:ml-8">
+        <p className="text-center md:w-3/4">
           You can also help on the Discord server by filling in some of the gaps in our database when the beta is out.
         </p>
         <div className="flex md:flex-row flex-col md:my-8 my-4 mb-8 justify-evenly items-center w-full">
