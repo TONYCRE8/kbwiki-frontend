@@ -4,7 +4,7 @@ function Layout({children}) {
     return (
         <>
             <ThemeManager />
-            <main className="flex m-0 p-0 items-center justify-center h-full">{children}</main>
+            <main className="flex m-0 p-0 items-center justify-center h-full flex-col">{children}</main>
             <Footer />
         </>
     )

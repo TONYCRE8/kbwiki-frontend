@@ -48,14 +48,33 @@ a {
   box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, ul, li {
   color: var(--text-color)
+}
+
+a {
+  color: var(--secondary-color)
 }
 
 h1 {
   @apply font-nunito-black text-4xl;
 }
 
-p {
-  @apply font-inter-regular
+h2, h3 {
+  @apply font-inter-semibold;
+}
+
+p, ul, li {
+  @apply font-inter-regular;
+}
+
+ul {
+  list-style-type: none;
+}
+ul li::before {
+  content: "\2022";
+  color: var(--primary-color);
+  font-weight: bold;
+  display: inline-block;
+  width: 1rem;
 }

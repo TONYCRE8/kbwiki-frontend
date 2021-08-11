@@ -1,9 +1,9 @@
-import {useState, useLayoutEffect} from "react"
+import {useState, useEffect} from "react"
 import themes from "../styles/themes"
 
 function ThemeManager() {
     const [theme, setTheme] = useState("dark")
-    useLayoutEffect(() => {
+    useEffect(() => {
         const localTheme = localStorage.getItem("theme")
 
         if (localTheme) {
@@ -20,6 +20,7 @@ function ThemeManager() {
                 {`
                 :root {
                     --bg-color: ${themes[theme].bgColor};
+                    --bg-accent: ${themes[theme].bgAccent};
                     --primary-color: ${themes[theme].primaryColor};
                     --secondary-color: ${themes[theme].secondaryColor};
                     --tertiary-color: ${themes[theme].tertiaryColor};
