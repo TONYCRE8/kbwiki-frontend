@@ -1,14 +1,28 @@
 import Head from "next/head"
 import Image from "next/image"
 import Layout from "../components/layout"
-import Logo from "../public/logo.png"
+import Logo from "../public/logo.svg"
 import Discord from "../public/discord.svg"
 
 export default function Home() {
   return (
     <Layout>
+      <Head>
+        <title>Keyboard Wiki Beta</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+        <meta name="description" content="The most comprehensive keyboard wikia for enthusiasts, cataloguing all kinds of switches, keycaps, keyboards, and more." />
+        <meta name="keywords" content="mechanical keyboards, mk, wikipedia, keycaps, gmk, epbt, gateron, cherry, mx, switches" />
+        <meta property="og:title" content="Keyboard Wiki Beta" key="facebook title" />
+        <meta property="twitter:title" content="Keyboard Wiki Beta" key="twitter title" />
+        <meta property="og:description" content="The most comprehensive keyboard wikia for enthusiasts, cataloguing all kinds of switches, keycaps, keyboards and more." />
+        <meta property="twitter:description" content="The most comprehensive keyboard wikia for enthusiasts, cataloguing all kinds of switches, keycaps, keyboards and more." />
+        <meta property="og:url" content="https://www.kb.wiki/" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="og:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1628683211/banner_cro1jc.png" />
+        <meta property="twitter:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1628683211/banner_cro1jc.png" />
+      </Head>
       <div className="flex items-center md:py-80 py-16 md:flex-row flex-col">
-        <div className="w-64">
+        <div className="w-80">
           <Image src={Logo} alt="Logo"/>
         </div>
         <div className="md:ml-8 mt-4">
