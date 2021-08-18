@@ -21,8 +21,8 @@ export default function Home() {
         <meta property="twitter:description" content="The most comprehensive keyboard wikia for enthusiasts, cataloguing all kinds of switches, keycaps, keyboards and more." />
         <meta property="og:url" content="https://www.kb.wiki/" />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="og:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1629224526/kbwiki-twitter_kr6wll.png" />
-        <meta property="twitter:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1629224526/kbwiki-twitter_kr6wll.png" />
+        <meta property="og:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1629292666/kbwiki-twitter_flrej3.png" />
+        <meta property="twitter:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1629292666/kbwiki-twitter_flrej3.png" />
       </Head>
       <section className="flex xl:w-3/5 w-4/5 items-center justify-center md:py-32 py-16 md:flex-row flex-col">
         <div className="w-80">
