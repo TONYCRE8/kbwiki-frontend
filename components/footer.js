@@ -5,7 +5,7 @@ function Footer() {
     return (
         <div className="my-0 mx-auto xl:w-3/5 w-4/5">
             <hr style={{borderColor: "var(--text-color)"}}></hr>
-            <div className="flex items-center md:justify-end justify-center">
+            <div className="flex py-4 items-center md:justify-end justify-center">
                 <div style={{fill: "var(--text-color)"}}>
                     <ValaIcon className="w-16 h-16"/>
                 </div>

@@ -21,15 +21,15 @@ export default function Home() {
         <meta property="twitter:description" content="The most comprehensive keyboard wikia for enthusiasts, cataloguing all kinds of switches, keycaps, keyboards and more." />
         <meta property="og:url" content="https://www.kb.wiki/" />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="og:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1628685870/banner-beta_oiwqen.png" />
-        <meta property="twitter:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1628685870/banner-beta_oiwqen.png" />
+        <meta property="og:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1629224526/kbwiki-twitter_kr6wll.png" />
+        <meta property="twitter:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1629224526/kbwiki-twitter_kr6wll.png" />
       </Head>
-      <section className="flex items-center md:py-32 py-16 md:flex-row flex-col">
+      <section className="flex xl:w-3/5 w-4/5 items-center justify-center md:py-32 py-16 md:flex-row flex-col">
         <div className="w-80">
           <Image src={Logo} alt="Logo"/>
         </div>
         <div className="md:ml-8 mt-4">
-          <h1 className="uppercase md:text-6xl md:mb-8 mb-4 tracking-wider md:text-left text-center">Coming Soon!</h1>
+          <h1 className="uppercase md:text-5xl md:mb-8 mb-4 tracking-wider md:text-left text-center">Coming Soon!</h1>
           <div className="border-l-8 border-solid rounded-l-md my-4" style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
             <p className="p-4">We&apos;re working hard on building this site.<br/>More details will be released soon.</p>
           </div>
@@ -44,7 +44,7 @@ export default function Home() {
       <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
       <section className="flex flex-col xl:w-3/5 w-4/5">
         <h2 className="text-4xl md:text-left text-center mb-4">What is this project about?</h2>
-        <p className="text-left md:ml-8">
+        <p className="text-left md:mx-8">
           This project aims to be the most comprehensive keyboard database on the internet.
           We plan on collecting all sorts of data about things like keycap sets, switches, keyboards, and other information all into one central hub.
           A lot of current databases around are either outdated, lacking older information, or simply lacking in features. We aim to provide a feature-rich product to house a repository of information.
@@ -53,7 +53,7 @@ export default function Home() {
       <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
       <section className="flex flex-col xl:w-3/5 w-4/5">
         <h2 className="text-4xl md:text-left text-center mb-4">What can I expect to see?</h2>
-        <div className="md:ml-8">
+        <div className="md:mx-8">
           <p>The beta will contain a selection of data collected over the months. In this we will aim to provide the following:</p>
           <div className="border-l-8 border-solid rounded-l-md my-4" style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
             <ul className="p-4">
