@@ -6,8 +6,9 @@ import Logo from "../public/logo-beta.svg"
 import Discord from "../public/discord.svg"
 import Kofi from "../public/kofi.svg"
 
-export default function Home() {
+import Switches from "../components/switches"
 
+export default function Home() {
   return (
     <Layout>
       <Head>
@@ -43,12 +44,7 @@ export default function Home() {
       </section>
       <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
       <section className="flex flex-col xl:w-3/5 w-4/5">
-        <h2 className="text-4xl md:text-left text-center mb-4">What is this project about?</h2>
-        <p className="text-left md:mx-8">
-          This project aims to be the most comprehensive keyboard database on the internet.
-          We plan on collecting all sorts of data about things like keycap sets, switches, keyboards, and other information all into one central hub.
-          A lot of current databases around are either outdated, lacking older information, or simply lacking in features. We aim to provide a feature-rich product to house a repository of information.
-        </p>
+        <Switches />
       </section>
       <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
       <section className="flex flex-col xl:w-3/5 w-4/5">
