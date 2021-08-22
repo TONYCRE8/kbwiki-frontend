@@ -6,8 +6,6 @@ import Logo from "../public/logo-beta.svg"
 import Discord from "../public/discord.svg"
 import Kofi from "../public/kofi.svg"
 
-import Switches from "../components/switches"
-
 export default function Home() {
   return (
     <Layout>
@@ -44,7 +42,6 @@ export default function Home() {
       </section>
       <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
       <section className="flex flex-col xl:w-3/5 w-4/5">
-        <Switches />
       </section>
       <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
       <section className="flex flex-col xl:w-3/5 w-4/5">
