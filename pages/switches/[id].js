@@ -17,7 +17,7 @@ const id = () => {
 
     const copyURL = () => {
         const el = document.createElement("input")
-        el.value = process.env.REACT_APP_STRAPI_API.concat("", router.asPath)
+        el.value = window.location.href
         document.body.appendChild(el)
         el.select()
         document.execCommand("copy")
