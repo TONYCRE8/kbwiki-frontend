@@ -1,4 +1,4 @@
-import ThemeManager from "./themeManager"
+import ThemeManager from "../themeManager"
 import Nav from "./nav"
 
 const Header = () => {

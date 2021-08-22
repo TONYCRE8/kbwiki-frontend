@@ -2,7 +2,7 @@ import {useRouter} from 'next/router'
 import Image from "next/image"
 import { useRef, useState } from 'react'
 
-import Layout from "../../components/layout"
+import Layout from "../../components/layout/layout"
 import { DATA } from "../../components/dataFetch"
 
 const id = () => {

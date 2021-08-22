@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Image from "next/image"
 
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
 import Logo from "../public/logo-beta.svg"
 import Discord from "../public/discord.svg"
 import Kofi from "../public/kofi.svg"
