@@ -1,5 +1,6 @@
 import {useRouter} from 'next/router'
 import Image from "next/image"
+import { useRef, useState } from 'react'
 
 import Layout from "../../components/layout"
 import { DATA } from "../../components/dataFetch"
@@ -7,8 +8,25 @@ import { DATA } from "../../components/dataFetch"
 const id = () => {
     const router = useRouter()
     const { id } = router.query
+    console.log(router)
 
     const data = DATA(`switches?_slug=${id}`)
+
+    const [copied, setCopied] = useState(false)
+    const urlCopy = useRef(null)
+
+    const copyURL = () => {
+        const el = document.createElement("input")
+        el.value = process.env.REACT_APP_STRAPI_API.concat("", router.asPath)
+        document.body.appendChild(el)
+        el.select()
+        document.execCommand("copy")
+        document.body.removeChild(el)
+        setCopied(true)
+        setTimeout(() => {
+            setCopied(false)
+        }, 3000)
+    }
 
     return (
         <Layout>
@@ -81,7 +99,7 @@ const id = () => {
                                     </section>
                                 </div>
                                 <section className="flex justify-between">
-                                    <button className="w-1/2 mr-2 h-8 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--primary-color)"}}>Share</button>
+                                    <button onClick={copyURL} className="w-1/2 mr-2 h-8 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--primary-color)"}}>{!copied ? "Share" : "Copied"}</button>
                                     <button className="w-1/2 ml-2 h-8 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--secondary-color)"}}>Edit Article</button>
                                 </section>
                             </div>
