@@ -25,20 +25,20 @@ const id = () => {
         setCopied(true)
         setTimeout(() => {
             setCopied(false)
-        }, 3000)
+        }, 1000)
     }
 
     return (
         <Layout>
-            <div className="xl:w-2/5 w-2/3">
+            <div className="xl:w-3/5 w-2/3">
             {switches.loaded && switches.singleData.map((s) => (
-                        <div className="flex flex-col">
+                        <div className="flex flex-col py-16">
                             <div className="flex flex-row justify-between items-end">
                                 <h1>{s.name}</h1>
                                 <small>Last edited: {s.updatedAt.slice(0,10)}</small>
                             </div>
                             <hr></hr>
-                            <div className="flex md:flex-row flex-col mt-8">
+                            <div className="flex justify-center md:flex-row flex-col mt-8">
                                 <div>
                                     <Image className="rounded-lg w-1/2 bg-white" width={430} height={430} src={`${process.env.REACT_APP_STRAPI_API}${s.thumb.formats.small.url}`} />
                                 </div>
@@ -99,7 +99,7 @@ const id = () => {
                                         </section>
                                     </div>
                                     <section className="flex justify-between">
-                                        <button onClick={copyURL} className="w-1/2 mr-2 h-8 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--primary-color)"}}>{!copied ? "Share" : "Copied"}</button>
+                                        <button onClick={copyURL} className={`${copied ? "opacity-40" : ""} transition duration-300 w-1/2 mr-2 h-8 uppercase rounded-xl font-nunito-black text-white`} style={{background: "var(--primary-color)"}}>{!copied ? "Share" : "Copied"}</button>
                                         <button className="w-1/2 ml-2 h-8 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--secondary-color)"}}>Edit Article</button>
                                     </section>
                                 </div>
