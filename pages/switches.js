@@ -8,7 +8,7 @@ const Switches = () => {
     const switches = DATA("switches?_sort=name:DESC")
     return (
         <Layout>
-          <div className="xl:w-2/3 w-4/5 py-16">
+          <div className="2xl:w-2/3 w-4/5 py-16">
             <div className="flex flex-col">
               <p className="font-nunito-black uppercase">Filters V</p>
               <div>
