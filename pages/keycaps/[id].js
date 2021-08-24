@@ -26,7 +26,13 @@ const id = () => {
         convertedDate.setMonth(convertedDate.getMonth()+data.manufacturer.lead)
         
         var formattedDate = convertedDate.toISOString().slice(0,7)
-        return formattedDate.replace(/-/g, "/")
+
+        var year = formattedDate.slice(0,4)
+        var quarter = Math.round(formattedDate.slice(5,7) / 3)
+
+        var newDate = year.concat(" Q", quarter)
+
+        return newDate
     }
 
     const copyURL = () => {
@@ -43,7 +49,7 @@ const id = () => {
     }
     return (
         <Layout>
-            <div className="xl:w-2/5 w-2/3">
+            <div className="xl:w-3/5 w-2/3">
                 {keycaps.loaded && keycaps.singleData.map((s) => (
                     <div className="flex flex-col py-16">
                         <div className="flex flex-row justify-between items-end">
@@ -53,9 +59,9 @@ const id = () => {
                         <hr></hr>
                         <div className="flex md:flex-row justify-center flex-col mt-8">
                             <div>
-                            <Image className="rounded-lg w-1/2 bg-white object-cover" width={430} height={216} src={`${process.env.REACT_APP_STRAPI_API}${s.thumbnail.formats.medium.url}`} />
+                                <Image className="rounded-lg md:w-1/2 w-full bg-white object-cover" width={500} height={240} src={`${process.env.REACT_APP_STRAPI_API}${s.thumbnail.formats.medium.url}`} />
                             </div>
-                            <div className="md:w-1/2 max-w-md w-full md:ml-4">
+                            <div className="md:w-1/2 md:max-w-md w-full md:ml-4">
                                 <div className="rounded-lg p-4 mb-4" style={{background: "var(--bg-accent)"}}>
                                     <section className="mb-2">
                                         <h2 className="text-center text-lg tracking-wider">General Info</h2>
@@ -73,8 +79,8 @@ const id = () => {
                                         </div>
                                         <div className="flex flex-row justify-between">
                                             <p>Run:</p>
-                                            <p className="font-inter-thin capitalize text-right">Started {s.run_start.replace(/-/g, "/")}<br/>
-                                            Ended {s.run_end.replace(/-/g, "/")}
+                                            <p className="font-inter-thin capitalize text-right">Start: {s.run_start.replace(/-/g, "/")}<br/>
+                                            End: {s.run_end.replace(/-/g, "/")}
                                             </p>
                                         </div>
                                         <div className="flex flex-row justify-between">
