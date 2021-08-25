@@ -87,7 +87,7 @@ const id = () => {
                                             <p>Status:</p>
                                             <p className="font-inter-thin capitalize">{s.status.name.replace("_", " ")}</p>
                                         </div>
-                                        {s.status.name != "completed" && (
+                                        {s.status.name != "Completed" && (
                                             <div className="flex flex-row justify-between">
                                                 <p>Estimated Completion:</p>
                                                 <p className="font-inter-thin capitalize text-right">{estLead(s)}
