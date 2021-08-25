@@ -59,7 +59,7 @@ const id = () => {
                         <hr></hr>
                         <div className="flex md:flex-row justify-center flex-col mt-8">
                             <div>
-                                <Image className="rounded-lg md:w-1/2 w-full bg-white object-cover" width={500} height={240} src={`${process.env.REACT_APP_STRAPI_API}${s.thumbnail.formats.medium.url}`} />
+                                <Image className="rounded-lg md:w-1/2 w-full bg-white object-cover" width={500} height={240} src={`${process.env.REACT_APP_STRAPI_API}${s.thumb.formats.medium.url}`} />
                             </div>
                             <div className="md:w-1/2 md:max-w-md w-full md:ml-4">
                                 <div className="rounded-lg p-4 mb-4" style={{background: "var(--bg-accent)"}}>
@@ -71,7 +71,7 @@ const id = () => {
                                         </div>
                                         <div className="flex flex-row justify-between">
                                             <p>Profile:</p>
-                                            <p className="font-inter-thin capitalize">{s.profile}</p>
+                                            <p className="font-inter-thin capitalize">{s.profile.name}</p>
                                         </div>
                                         <div className="flex flex-row justify-between">
                                             <p>Designer:</p>
@@ -85,9 +85,9 @@ const id = () => {
                                         </div>
                                         <div className="flex flex-row justify-between">
                                             <p>Status:</p>
-                                            <p className="font-inter-thin capitalize">{s.status.replace("_", " ")}</p>
+                                            <p className="font-inter-thin capitalize">{s.status.name.replace("_", " ")}</p>
                                         </div>
-                                        {s.status != "completed" && (
+                                        {s.status.name != "completed" && (
                                             <div className="flex flex-row justify-between">
                                                 <p>Estimated Completion:</p>
                                                 <p className="font-inter-thin capitalize text-right">{estLead(s)}
