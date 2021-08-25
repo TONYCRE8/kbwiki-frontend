@@ -48,11 +48,11 @@ const id = () => {
                                             <h2 className="text-center text-lg tracking-wider">General Info</h2>
                                             <div className="flex flex-row justify-between">
                                                 <p>Type:</p>
-                                                <p className="font-inter-thin capitalize">{s.type}</p>
+                                                <p className="font-inter-thin capitalize">{s.type.name}</p>
                                             </div>
                                             <div className="flex flex-row justify-between">
                                                 <p>Manufacturer:</p>
-                                                <p className="font-inter-thin">{s.manufacturer}</p>
+                                                <p className="font-inter-thin">{s.manufacturer.name}</p>
                                             </div>
                                             <div className="flex flex-row justify-between">
                                                 <p>Designer:</p>
@@ -63,11 +63,11 @@ const id = () => {
                                             <h2 className="text-center text-lg tracking-wider">Operation Details</h2>
                                             <div className="flex flex-row justify-between">
                                                 <p>Actuation:</p>
-                                                <p className="font-inter-thin">{s.actuation}</p>
+                                                <p className="font-inter-thin">{s.actuation}g</p>
                                             </div>
                                             <div className="flex flex-row justify-between">
                                                 <p>Bottom Out:</p>
-                                                <p className="font-inter-thin">{s.bottom_out}</p>
+                                                <p className="font-inter-thin">{s.bottom_out}g</p>
                                             </div>
                                             <div className="flex flex-row justify-between">
                                                 <p>Pre-Travel:</p>
