@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 
 import Layout from "../../components/layout/layout"
 import { DATA } from "../../components/dataFetch"
-import SkeletonKeycap from '../../components/skeletons/skeletonKeycap'
+import SkeletonKeycap from "../../components/skeletons/skeletonKeycap"
 
 const id = () => {
     const router = useRouter()
@@ -33,6 +33,12 @@ const id = () => {
         var newDate = year.concat(" Q", quarter)
 
         return newDate
+    }
+
+    const formatKits = (data) => {
+        var kit = data.split("-")
+        kit.splice(0,1)
+        return kit
     }
 
     const copyURL = () => {
@@ -97,7 +103,11 @@ const id = () => {
                                     </section>
                                     <section className="mb-2">
                                         <h2 className="text-center text-lg tracking-wider">Available kits</h2>
-                                        <p className="font-inter-thin capitalize"></p>
+                                        <ul className="font-inter-thin capitalize">{formatKits(s.kits).map((kit) => (
+                                            <li>
+                                                {kit}
+                                            </li>
+                                        ))}</ul>
                                     </section>
                                 </div>
                                 <section className="flex justify-between">
