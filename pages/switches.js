@@ -3,10 +3,10 @@ import Link from "next/link"
 import Layout from "../components/layout/layout"
 import Image from "next/image"
 import SkeletonSwitchList from "../components/skeletons/skeletonSwitchList"
-import Filter from "../components/filter"
 
 const Switches = () => {
     const switches = DATA("switches?_sort=name:DESC")
+    console.log(switches)
     return (
         <Layout>
           <div className="2xl:w-2/3 w-4/5 py-16">
@@ -15,7 +15,7 @@ const Switches = () => {
               {/* <Filter /> */}
             </div>
             <div className="flex flex-row flex-wrap justify-center">
-              {switches.loaded && switches.data.map((s) => (
+              {!switches.loading && switches.data.map((s) => (
                 <Link href={`/switches/${s.slug}`} key={s.slug} id={s.id}>
                     <div className="flex flex-row justify-between w-80 h-28 border-r-8 rounded-md cursor-pointer m-4 shadow-lg transition transform duration-150 hover:-translate-y-1" style={{borderColor: "var(--primary-color)"}}>
                       <Image className="rounded-lg" width={112} height={112} src={`${process.env.REACT_APP_STRAPI_API}${s.thumb.formats.thumbnail.url}`} />
@@ -25,13 +25,12 @@ const Switches = () => {
                         {s.manufacturer.name}<br/>
                         {s.actuation}g
                         </p>
-                        {console.log(s)}
                       </div>
                     </div>
                 </Link>
               ))}
             </div>
-            {!switches.loaded && (
+            {switches.loading && (
               <SkeletonSwitchList />
             )}
           </div>

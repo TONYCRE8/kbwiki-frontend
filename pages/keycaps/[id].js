@@ -18,20 +18,13 @@ const id = () => {
     const urlCopy = useRef(null)
 
     const estLead = (data) => {
-        // data.manufacturer.lead = 14
         var date = data.run_end
-        // = 2021-01-15
         var convertedDate = new Date(date)
-        // = Fri Jan 15 2021 00:00:00 GMT+0000 (Greenwich Mean Time)
         convertedDate.setMonth(convertedDate.getMonth()+data.manufacturer.lead)
-        
         var formattedDate = convertedDate.toISOString().slice(0,7)
-
         var year = formattedDate.slice(0,4)
         var quarter = Math.round(formattedDate.slice(5,7) / 3)
-
         var newDate = year.concat(" Q", quarter)
-
         return newDate
     }
 
@@ -56,7 +49,7 @@ const id = () => {
     return (
         <Layout>
             <div className="xl:w-3/5 w-2/3">
-                {keycaps.loaded && keycaps.singleData.map((s) => (
+                {!keycaps.loading && keycaps.data.map((s) => (
                     <div className="flex flex-col py-16">
                         <div className="flex flex-row justify-between items-end">
                             <h1>{s.name}</h1>
@@ -118,7 +111,7 @@ const id = () => {
                         </div>
                     </div>
                 ))}
-                {!keycaps.loaded && (
+                {keycaps.loading && (
                     <SkeletonKeycap />
                 )}
             </div>

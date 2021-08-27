@@ -31,7 +31,7 @@ const id = () => {
     return (
         <Layout>
             <div className="xl:w-3/5 w-2/3">
-            {switches.loaded && switches.singleData.map((s) => (
+            {!switches.loading && switches.data.map((s) => (
                         <div className="flex flex-col py-16">
                             <div className="flex flex-row justify-between items-end">
                                 <h1>{s.name}</h1>
@@ -107,7 +107,7 @@ const id = () => {
                         </div>
                     ))}
 
-                {!switches.loaded && (
+                {switches.loading && (
                     <SkeletonSwitch />
                 )}
             </div>
