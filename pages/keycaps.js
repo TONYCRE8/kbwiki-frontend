@@ -6,20 +6,63 @@ import {DATA} from "../components/dataFetch"
 
 import SkeletonKeycapList from "../components/skeletons/skeletonKeycapList"
 
-function Keycaps() {
-    const sets = DATA("keycaps?_sort=name:DESC")
-    console.log(sets)
+import Select from "react-select"
+import {useQuery, useQueryClient} from "react-query"
+import {useState} from "react"
+import axios from "axios"
+
+const getKeycaps = async(key) => {
+    const manuId = key.queryKey[1].manu
+    if (manuId) {
+        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}`)
+        /* const data = DATA(`keycaps?manufacturer.id=${manuId}`)
+        We should be able to use DATA from dataFetch to do this.
+        but it won't work for some reason. */
+        return data.data
+    }
+    const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps`)
+    return data.data
+}
+
+function Keycaps ({keycaps, manufacturer}) {
+    const queryClient = useQueryClient()
+
+    keycaps = DATA("keycaps?_sort=name:DESC")
+    manufacturer = DATA("keycap-manufacturers")
+
+    const manufacturers = manufacturer.data
+    const [manuId, setManuId] = useState(null)
+    
+    const {data, status} = useQuery(["keycaps", {manu: manuId}], getKeycaps, {initialData: keycaps.data})
     return (
         <Layout>
             <div className="2xl:w-2/3 w-4/5 py-16">
                 <div className="flex flex-col">
                     <p className="font-nunito-black uppercase">Filters V</p>
                     <div>
-                        
+                        <Select
+                            getOptionLabel={option => option.name}
+                            getOptionValue={option => option.id}
+                            options={manufacturers}
+                            instanceId="Types"
+                            placeholder="Manufacturer..."
+                            isClearable
+                            onChange={value => setManuId(value ? value.id : null)}
+                        />
                     </div>
                 </div>
                 <div className="flex flex-row flex-wrap justify-center">
-                    {sets.loaded && sets.data.map((s) => (
+                    {status === "loading" && (
+                        <SkeletonKeycapList />
+                        /* status ==== "loading" never actually activates
+                        Replace with keycaps.loading */
+                    )}
+                    {status === "error" && (
+                        // This can call when we make getKeycaps use DATA from fetchData
+                        <div>Error loading data</div>
+                    )}
+
+                    {!keycaps.loading && data.map((s) => (
                         <Link href={`/keycaps/${s.slug}`} key={s.id}>
                             <div className="w-72 m-4 cursor-pointer shadow-lg transition transform duration-150 hover:-translate-y-1">
                                 <Image className="rounded-t-3xl object-cover w-full" width={288} height={72} src={`${process.env.REACT_APP_STRAPI_API}${s.thumb.formats.small.url}`} />
@@ -36,9 +79,6 @@ function Keycaps() {
                             </div>
                         </Link>
                     ))}
-                    {!sets.loaded && (
-                        <SkeletonKeycapList />
-                    )}
                 </div>
             </div>
         </Layout>
