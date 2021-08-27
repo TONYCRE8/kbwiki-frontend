@@ -1,20 +1,28 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
-export function DATA(query) {
+export const DATA = (query) => {
     const [singleData, setSingleData] = useState()
     const [data, setData] = useState([])
-    const [loaded, setLoaded] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
+
     useEffect(() => {
-        axios
-            .get(`${process.env.REACT_APP_STRAPI_API}/${query}`)
-            .then(response => {
-                setData(response.data)
-                setSingleData(response.data)
-                setLoaded(true)
-            })
-            .catch(console.error)
+        const fetchData = async() =>
+        {
+            setError(false)
+            setLoading(true)
+            try {
+                const res = await axios(`${process.env.REACT_APP_STRAPI_API}/${query}`)
+                setData(res.data)
+            } catch (error) {
+                setError(true)
+            }
+            setLoading(false)
+            console.log(data, query)
+        }
+        fetchData()
     }, [query])
 
-    return {data, singleData, loaded}
-} 
+    return {data, loading}
+}
