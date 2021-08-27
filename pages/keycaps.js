@@ -6,10 +6,11 @@ import {DATA} from "../components/dataFetch"
 
 import SkeletonKeycapList from "../components/skeletons/skeletonKeycapList"
 
-import Select from "react-select"
+import Select, { NonceProvider } from "react-select"
 import {useQuery, useQueryClient} from "react-query"
 import {useState} from "react"
 import axios from "axios"
+import StateManager from "react-select"
 
 const getKeycaps = async(key) => {
     const manuId = key.queryKey[1].manu
@@ -34,20 +35,78 @@ function Keycaps ({keycaps, manufacturer}) {
     const [manuId, setManuId] = useState(null)
     
     const {data, status} = useQuery(["keycaps", {manu: manuId}], getKeycaps, {initialData: keycaps.data})
+    
+    const customTheme = {
+        option: (provided, state) => ({
+            color: state.isSelected ? "white" : "var(--text-color)",
+            background: state.isSelected ? "var(--secondary-color)" : "var(--bg-accent)",
+            padding: "4px",
+            width: "100px",
+            textAlign: "center",
+            borderRadius: 16,
+            margin: "0 2px",
+            ":active": {
+                backgroundColor: "var(--secondary-color)",
+                color: "white"
+            }
+          }),
+          control: (provided) => ({
+            ...provided,
+            background: "none",
+            border: "none",
+          }),
+          container: () => ({
+            display: "flex",
+            flexFlow: "row-reverse wrap"
+          }),
+          dropdownIndicator: () => ({
+            display: "none"
+          }),
+          indicatorSeparator: () => ({
+            display: "none"
+          }),
+          indicatorsContainer: (provided) => ({
+            ...provided,
+            width: 100
+          }),
+          menu: () => ({
+            background: "none",
+          }),
+          menuList: () => ({
+            display: "flex",
+            flexFlow: "row wrap",
+            width: "auto",
+          }),
+          valueContainer: (provided) => ({
+              ...provided,
+              display: "none"
+          }),
+          singleValue: () => ({
+            display: "none",
+          }),
+          loadingMessage: () => ({
+            color: "var(--text-color)"
+          })
+    }
+    
     return (
         <Layout>
             <div className="2xl:w-2/3 w-4/5 py-16">
                 <div className="flex flex-col">
                     <p className="font-nunito-black uppercase">Filters V</p>
-                    <div>
+                    <div className="flex flex-row">
+                        <p className="mr-4">Manufacturer: </p>
                         <Select
                             getOptionLabel={option => option.name}
                             getOptionValue={option => option.id}
                             options={manufacturers}
                             instanceId="Types"
-                            placeholder="Manufacturer..."
+                            placeholder=""
+                            isSearchable
                             isClearable
+                            menuIsOpen
                             onChange={value => setManuId(value ? value.id : null)}
+                            styles={customTheme}
                         />
                     </div>
                 </div>
