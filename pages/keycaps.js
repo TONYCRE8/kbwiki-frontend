@@ -15,6 +15,14 @@ import selectTheme from "../styles/select"
 
 const getKeycaps = async(key) => {
     const manuId = key.queryKey[1].manu
+    const profileIds = key.queryKey[2].prof.map(id => `profile.id=${id}`)
+
+    const profileQueryString = profileIds.join("&")
+
+    if (manuId && profileQueryString) {
+        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}&${profileQueryString}`)
+    }
+
     if (manuId) {
         const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}`)
         /* const data = DATA(`keycaps?manufacturer.id=${manuId}`)
@@ -23,21 +31,28 @@ const getKeycaps = async(key) => {
         // data logs as an object, of which data (data.data) contains our values.
         return data.data
     }
+    if (profileQueryString) {
+        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?${profileQueryString}`)
+        return data.data
+    }
+    
     const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps`)
     return data.data
 }
 
-function Keycaps ({keycaps, manufacturer}) {
+function Keycaps ({keycaps, manufacturer, profile}) {
     const queryClient = useQueryClient()
 
     keycaps = DATA("keycaps?_sort=name:DESC")
     manufacturer = DATA("keycap-manufacturers")
+    profile = DATA("keycap-profiles")
 
     const manufacturers = manufacturer.data
+    const profiles = profile.data
     const [manuId, setManuId] = useState(null)
+    const [profileId, setProfileId] = useState([])
     
-    const {data, status} = useQuery(["keycaps", {manu: manuId}], getKeycaps, {initialData: keycaps.data})
-    
+    const {data, status} = useQuery(["keycaps", {manu: manuId}, {prof: profileId}], getKeycaps)
     return (
         <Layout>
             <div className="flex flex-col">
@@ -48,12 +63,29 @@ function Keycaps ({keycaps, manufacturer}) {
                         getOptionLabel={option => option.name}
                         getOptionValue={option => option.id}
                         options={manufacturers}
-                        instanceId="Types"
+                        instanceId="Manufacturers"
                         placeholder=""
                         isSearchable
                         isClearable
                         menuIsOpen
                         onChange={value => setManuId(value ? value.id : null)}
+                        styles={selectTheme}
+                    />
+                </div>
+                <div className="flex flex-row">
+                    <p className="mr-4">Profile: </p>
+                    <Select
+                        getOptionLabel={option => option.name}
+                        getOptionValue={option => option.id}
+                        options={profiles}
+                        instanceId="Profiles"
+                        placeholder=""
+                        isSearchable
+                        isClearable
+                        isMulti
+                        menuIsOpen
+                        hideSelectedOptions={false}
+                        onChange={values => setProfileId(values ? values.map(value => value.id) : null)}
                         styles={selectTheme}
                     />
                 </div>
@@ -66,10 +98,12 @@ function Keycaps ({keycaps, manufacturer}) {
                 )}
                 {status === "error" && (
                     // This can call when we make getKeycaps use DATA from fetchData
-                    <div>Error loading data, please try again later.</div>
+                    <div className="pt-16">
+                        <p style={{color: "var(--text-color)"}}>Error loading data, please try again later.</p>
+                    </div>
                 )}
 
-                {!keycaps.loading && data.map((s) => (
+                {status === "success" && data.map((s) => (
                     <Link href={`/keycaps/${s.slug}`} key={s.id}>
                         <div className="w-72 m-4 cursor-pointer shadow-lg transition transform duration-150 hover:-translate-y-1">
                             <Image className="rounded-t-3xl object-cover w-full" width={288} height={72} src={`${process.env.REACT_APP_STRAPI_API}${s.thumb.formats.small.url}`} />
