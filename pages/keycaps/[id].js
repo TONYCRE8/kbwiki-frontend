@@ -97,7 +97,7 @@ const ID = () => {
                                 <section className="mb-2">
                                     <h2 className="text-center text-lg tracking-wider">Available kits</h2>
                                     <ul className="font-inter-thin capitalize">{formatKits(s.kits).map((kit) => (
-                                        <li>
+                                        <li key={kit}>
                                             {kit}
                                         </li>
                                     ))}</ul>
