@@ -23,7 +23,7 @@ export default function Home() {
         <meta property="og:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1629292666/kbwiki-twitter_flrej3.png" />
         <meta property="twitter:image" content="https://res.cloudinary.com/tonycre8/image/upload/v1629292666/kbwiki-twitter_flrej3.png" />
       </Head>
-      <section className="flex xl:w-3/5 w-4/5 items-center justify-center md:py-32 py-16 md:flex-row flex-col">
+      <section className="flex items-center justify-center md:py-32 py-16 md:flex-row flex-col">
         <div className="w-80">
           <Image src={Logo} alt="Logo"/>
         </div>
@@ -40,11 +40,11 @@ export default function Home() {
           </a>
         </div>
       </section>
-      <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
-      <section className="flex flex-col xl:w-3/5 w-4/5">
+      <hr className="my-16" style={{borderColor: "var(--text-color)"}}></hr>
+      <section className="flex flex-col">
       </section>
-      <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
-      <section className="flex flex-col xl:w-3/5 w-4/5">
+      <hr className="my-16" style={{borderColor: "var(--text-color)"}}></hr>
+      <section className="flex flex-col">
         <h2 className="text-4xl md:text-left text-center mb-4">What can I expect to see?</h2>
         <div className="md:mx-8">
           <p>The beta will contain a selection of data collected over the months. In this we will aim to provide the following:</p>
@@ -66,8 +66,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <hr className="xl:w-3/5 w-4/5 my-16" style={{borderColor: "var(--text-color)"}}></hr>
-      <section className="flex flex-col xl:w-3/5 w-4/5 mb-8 justify-center items-center">
+      <hr className="my-16" style={{borderColor: "var(--text-color)"}}></hr>
+      <section className="flex flex-col mb-8 justify-center items-center">
         <h2 className="text-4xl text-center mb-4">What can you do?</h2>
         <p className="text-center md:w-3/4">
           There&apos;s a bunch to be done. The best thing you can do is show your support! Join our Discord server, donate to the Ko-Fi if at all possible, and spread word about the project!

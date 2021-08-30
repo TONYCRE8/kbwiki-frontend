@@ -59,6 +59,11 @@ const Nav = () => {
                         </a>
                     </Link>
                 </div>
+                <Link href="/faq">
+                    <a className="md:w-32 w-full md:h-8 h-16 text-center mt-2">
+                        <p className="md:ml-0 ml-20 md:text-lg text-3xl md:mt-0 mt-4 font-nunito-black uppercase" style={{color: "var(--text-color)"}}>FAQ</p>
+                    </a>
+                </Link>
             </div>
             <div onClick={() => toggleItem(nav)} ref={el => {el = nav}} className="md:hidden flex">
                 <CgMenu className="text-6xl z-50 mt-2 -mr-4" style={{color: "var(--text-color)"}}/>
