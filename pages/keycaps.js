@@ -40,54 +40,52 @@ function Keycaps ({keycaps, manufacturer}) {
     
     return (
         <Layout>
-            <div className="2xl:w-2/3 w-4/5 py-16">
-                <div className="flex flex-col">
-                    <p className="font-nunito-black uppercase">Filters V</p>
-                    <div className="flex flex-row">
-                        <p className="mr-4">Manufacturer: </p>
-                        <Select
-                            getOptionLabel={option => option.name}
-                            getOptionValue={option => option.id}
-                            options={manufacturers}
-                            instanceId="Types"
-                            placeholder=""
-                            isSearchable
-                            isClearable
-                            menuIsOpen
-                            onChange={value => setManuId(value ? value.id : null)}
-                            styles={selectTheme}
-                        />
-                    </div>
+            <div className="flex flex-col">
+                <p className="font-nunito-black uppercase">Filters V</p>
+                <div className="flex flex-row">
+                    <p className="mr-4">Manufacturer: </p>
+                    <Select
+                        getOptionLabel={option => option.name}
+                        getOptionValue={option => option.id}
+                        options={manufacturers}
+                        instanceId="Types"
+                        placeholder=""
+                        isSearchable
+                        isClearable
+                        menuIsOpen
+                        onChange={value => setManuId(value ? value.id : null)}
+                        styles={selectTheme}
+                    />
                 </div>
-                <div className="flex flex-row flex-wrap justify-center">
-                    {status === "loading" && (
-                        <SkeletonKeycapList />
-                        /* status ==== "loading" never actually activates
-                        Replace with keycaps.loading */
-                    )}
-                    {status === "error" && (
-                        // This can call when we make getKeycaps use DATA from fetchData
-                        <div>Error loading data, please try again later.</div>
-                    )}
+            </div>
+            <div className="flex flex-row flex-wrap justify-center">
+                {status === "loading" && (
+                    <SkeletonKeycapList />
+                    /* status ==== "loading" never actually activates
+                    Replace with keycaps.loading */
+                )}
+                {status === "error" && (
+                    // This can call when we make getKeycaps use DATA from fetchData
+                    <div>Error loading data, please try again later.</div>
+                )}
 
-                    {!keycaps.loading && data.map((s) => (
-                        <Link href={`/keycaps/${s.slug}`} key={s.id}>
-                            <div className="w-72 m-4 cursor-pointer shadow-lg transition transform duration-150 hover:-translate-y-1">
-                                <Image className="rounded-t-3xl object-cover w-full" width={288} height={72} src={`${process.env.REACT_APP_STRAPI_API}${s.thumb.formats.small.url}`} />
-                                <div className="text-right">
-                                    <h2 className="font-nunito-black text-2xl leading-6">{s.name}</h2>
-                                    <div className="border-r-8 rounded-br-lg" style={{borderColor: "var(--primary-color)"}}>
-                                        <p className="mr-4 pb-2 text-sm leading-4 font-inter-thin capitalize">
-                                            {s.manufacturer.name}<br />
-                                            {s.profile.name} profile<br />
-                                            {s.status.name}
-                                        </p>
-                                    </div>
+                {!keycaps.loading && data.map((s) => (
+                    <Link href={`/keycaps/${s.slug}`} key={s.id}>
+                        <div className="w-72 m-4 cursor-pointer shadow-lg transition transform duration-150 hover:-translate-y-1">
+                            <Image className="rounded-t-3xl object-cover w-full" width={288} height={72} src={`${process.env.REACT_APP_STRAPI_API}${s.thumb.formats.small.url}`} />
+                            <div className="text-right">
+                                <h2 className="font-nunito-black text-2xl leading-6">{s.name}</h2>
+                                <div className="border-r-8 rounded-br-lg" style={{borderColor: "var(--primary-color)"}}>
+                                    <p className="mr-4 pb-2 text-sm leading-4 font-inter-thin capitalize">
+                                        {s.manufacturer.name}<br />
+                                        {s.profile.name} profile<br />
+                                        {s.status.name}
+                                    </p>
                                 </div>
                             </div>
-                        </Link>
-                    ))}
-                </div>
+                        </div>
+                    </Link>
+                ))}
             </div>
         </Layout>
     )
