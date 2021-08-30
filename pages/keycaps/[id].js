@@ -1,6 +1,6 @@
 import {useRouter} from 'next/router'
 import Image from "next/image"
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import Layout from "../../components/layout/layout"
 import { DATA } from "../../components/dataFetch"
@@ -50,7 +50,7 @@ const id = () => {
         <Layout>
             {/* <div className="xl:w-3/5 w-2/3"> */}
             {!keycaps.loading && keycaps.data.map((s) => (
-                <div className="flex flex-col py-16">
+                <div className="flex flex-col py-16" key={s.id}>
                     <div className="flex flex-row justify-between items-end">
                         <h1>{s.name}</h1>
                         <small>Last edited: {s.updatedAt.slice(0,10)}</small>
