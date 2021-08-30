@@ -6,7 +6,7 @@ import Layout from "../../components/layout/layout"
 import { DATA } from "../../components/dataFetch"
 import SkeletonSwitch from '../../components/skeletons/skeletonSwitch'
 
-const id = () => {
+const ID = () => {
     const router = useRouter()
     const { id } = router.query
 
@@ -114,4 +114,4 @@ const id = () => {
     )
 }
 
-export default id
+export default ID

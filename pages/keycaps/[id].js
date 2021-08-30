@@ -6,7 +6,7 @@ import Layout from "../../components/layout/layout"
 import { DATA } from "../../components/dataFetch"
 import SkeletonKeycap from "../../components/skeletons/skeletonKeycap"
 
-const id = () => {
+const ID = () => {
     const router = useRouter()
     const { id } = router.query
 
@@ -118,4 +118,4 @@ const id = () => {
     )
 }
 
-export default id
+export default ID
