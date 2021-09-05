@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
+import {MdArrowDropDown, MdArrowDropUp} from "react-icons/md"
 
 import Layout from "../components/layout/layout"
 import {DATA} from "../components/dataFetch"
@@ -8,86 +9,141 @@ import SkeletonKeycapList from "../components/skeletons/skeletonKeycapList"
 
 import Select from "react-select"
 import {useQuery, useQueryClient} from "react-query"
-import {useState} from "react"
+import {useState, useRef} from "react"
 import axios from "axios"
 
-import selectTheme from "../styles/select"
+import {selectTheme, colorSelectTheme} from "../styles/select"
 
 const getKeycaps = async(key) => {
     const manuId = key.queryKey[1].manu
     const profileIds = key.queryKey[2].prof.map(id => `profile.id=${id}`)
+    const colorIds = key.queryKey[3].col.map(id => `colors.id=${id}`)
 
     const profileQueryString = profileIds.join("&")
+    const colorQueryString = colorIds.join("&")
+
+    if (manuId && profileQueryString && colorQueryString) {
+        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}&${profileQueryString}&${colorQueryString}`)
+        return data.data
+    }
 
     if (manuId && profileQueryString) {
         const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}&${profileQueryString}`)
+        return data.data
+    }
+
+    if (manuId && colorQueryString) {
+        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}&${colorQueryString}`)
+        return data.data
+    }
+
+    if (profileQueryString && colorQueryString) {
+        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?${profileQueryString}&${colorQueryString}`)
+        return data.data
     }
 
     if (manuId) {
         const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}`)
-        /* const data = DATA(`keycaps?manufacturer.id=${manuId}`)
-        We should be able to use DATA from dataFetch to do this.
-        but it won't work for some reason. */
-        // data logs as an object, of which data (data.data) contains our values.
         return data.data
     }
     if (profileQueryString) {
         const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?${profileQueryString}`)
         return data.data
     }
-    
+    if (colorQueryString) {
+        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?${colorQueryString}`)
+        return data.data
+    }
     const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps`)
     return data.data
 }
 
-function Keycaps ({keycaps, manufacturer, profile}) {
+function Keycaps ({}) {
+    const toggleMenu = () => {
+        if (toggle) {
+            setToggle(!toggle)
+        }
+        else {
+            setToggle(!toggle)
+        }
+        console.log(toggle)
+    }
+
+    const [toggle, setToggle] = useState(false)
+
     const queryClient = useQueryClient()
 
-    keycaps = DATA("keycaps?_sort=name:DESC")
-    manufacturer = DATA("keycap-manufacturers")
-    profile = DATA("keycap-profiles")
+    const manufacturer = DATA("keycap-manufacturers")
+    const profile = DATA("keycap-profiles")
+    const color = DATA("keycap-colors")
 
     const manufacturers = manufacturer.data
     const profiles = profile.data
+    const colors = color.data
+
     const [manuId, setManuId] = useState(null)
     const [profileId, setProfileId] = useState([])
+    const [colorId, setColorId] = useState([])
     
-    const {data, status} = useQuery(["keycaps", {manu: manuId}, {prof: profileId}], getKeycaps)
+    const {data, status} = useQuery(["keycaps", {manu: manuId}, {prof: profileId}, {col: colorId}], getKeycaps)
+    console.log(colorSelectTheme) 
     return (
         <Layout>
             <div className="flex flex-col">
-                <p className="font-nunito-black uppercase">Filters V</p>
-                <div className="flex flex-row">
-                    <p className="mr-4">Manufacturer: </p>
-                    <Select
-                        getOptionLabel={option => option.name}
-                        getOptionValue={option => option.id}
-                        options={manufacturers}
-                        instanceId="Manufacturers"
-                        placeholder=""
-                        isSearchable
-                        isClearable
-                        menuIsOpen
-                        onChange={value => setManuId(value ? value.id : null)}
-                        styles={selectTheme}
-                    />
-                </div>
-                <div className="flex flex-row">
-                    <p className="mr-4">Profile: </p>
-                    <Select
-                        getOptionLabel={option => option.name}
-                        getOptionValue={option => option.id}
-                        options={profiles}
-                        instanceId="Profiles"
-                        placeholder=""
-                        isSearchable
-                        isClearable
-                        isMulti
-                        menuIsOpen
-                        hideSelectedOptions={false}
-                        onChange={values => setProfileId(values ? values.map(value => value.id) : null)}
-                        styles={selectTheme}
-                    />
+                <p onClick={toggleMenu} className="font-nunito-black text-xl uppercase cursor-pointer flex flex-row">Filters {toggle ? <MdArrowDropUp className="text-2xl"/> : <MdArrowDropDown className="text-2xl" /> }</p>
+                <div className={`${toggle ? "flex h-48 py-4" : "h-0"} transition-all duration-300 overflow-hidden flex-col border-l-8 border-solid rounded-md my-4`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
+                    <div className="flex flex-row ml-4">
+                        <p className="mr-4 mt-1 font-inter-semibold">Manufacturer: </p>
+                        <Select
+                            getOptionLabel={option => option.name}
+                            getOptionValue={option => option.id}
+                            options={manufacturers}
+                            instanceId="Manufacturers"
+                            placeholder=""
+                            isSearchable
+                            isClearable
+                            menuIsOpen
+                            onChange={value => setManuId(value ? value.id : null)}
+                            className="font-inter-regular"
+                            styles={selectTheme}
+                        />
+                    </div>
+                    <div className="flex flex-row ml-4">
+                        <p className="mr-4 mt-1 font-inter-semibold">Profile: </p>
+                        <Select
+                            getOptionLabel={option => option.name}
+                            getOptionValue={option => option.id}
+                            options={profiles}
+                            instanceId="Profiles"
+                            placeholder=""
+                            isSearchable
+                            isClearable
+                            isMulti
+                            menuIsOpen
+                            hideSelectedOptions={false}
+                            className="font-inter-regular"
+                            onChange={values => setProfileId(values ? values.map(value => value.id) : null)}
+                            styles={selectTheme}
+                        />
+                    </div>
+                    <div className="flex flex-row ml-4">
+                        <p className="mr-4 mt-1 font-inter-semibold">Color: </p>
+                        <Select
+                            getOptionLabel={option => option.color}
+                            getOptionValue={option => option.id}
+                            options={colors}
+                            instanceId="Colors"
+                            placeholder=""
+                            isSearchable
+                            isClearable
+                            isMulti
+                            menuIsOpen
+                            hideSelectedOptions={false}
+                            className="font-inter-regular capitalize justify-end"
+                            onChange={values => setColorId(values ? values.map(value => value.id) : null)}
+                            styles={colorSelectTheme}
+                        />
+                    </div>
                 </div>
             </div>
             <div className="flex flex-row flex-wrap justify-center">
@@ -100,6 +156,11 @@ function Keycaps ({keycaps, manufacturer, profile}) {
                     // This can call when we make getKeycaps use DATA from fetchData
                     <div className="pt-16">
                         <p style={{color: "var(--text-color)"}}>Error loading data, please try again later.</p>
+                    </div>
+                )}
+                {status === "success" && data.length === 0 && (
+                    <div className="pt-16">
+                        <p style={{color: "var(--text-color)"}}>Nothing matches your search! Select some different filters and try again!</p>
                     </div>
                 )}
 
