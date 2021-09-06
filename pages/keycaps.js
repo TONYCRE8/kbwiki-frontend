@@ -23,6 +23,8 @@ const getKeycaps = async(key) => {
     const profileQueryString = profileIds.join("&")
     const colorQueryString = colorIds.join("&")
 
+    // Refine this whole thing
+
     if (manuId && profileQueryString && colorQueryString) {
         const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}&${profileQueryString}&${colorQueryString}`)
         return data.data
@@ -127,10 +129,10 @@ function Keycaps ({}) {
     console.log(colorSelectTheme) 
     return (
         <Layout>
-            <div className="flex flex-col">
-                <p onClick={toggleMenu} className="font-nunito-black text-xl uppercase cursor-pointer flex flex-row">Filters {toggle ? <MdArrowDropUp className="text-2xl"/> : <MdArrowDropDown className="text-2xl" /> }</p>
-                <div className={`${toggle ? "flex h-52 py-4" : "h-0"} transition-all duration-300 overflow-hidden flex-col border-l-8 border-solid rounded-md my-4`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
-                    <div className="flex flex-row ml-4">
+            <section className="flex flex-col">
+                <button onClick={toggleMenu} className="font-nunito-black text-xl uppercase cursor-pointer flex flex-row" style={{color: "var(--text-color)"}}>Filters {toggle ? <MdArrowDropUp className="text-2xl"/> : <MdArrowDropDown className="text-2xl" /> }</button>
+                <div className={`${toggle ? "flex h-72 py-4" : "h-0"} transition-all duration-300 overflow-hidden flex-col border-l-8 border-solid rounded-md my-4`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
+                    <div className="flex flex-row ml-4 my-2">
                         <p className="mr-4 mt-1 font-inter-semibold">Manufacturer: </p>
                         <Select
                             getOptionLabel={option => option.name}
@@ -146,7 +148,7 @@ function Keycaps ({}) {
                             styles={selectTheme}
                         />
                     </div>
-                    <div className="flex flex-row ml-4">
+                    <div className="flex flex-row ml-4 my-2">
                         <p className="mr-4 mt-1 font-inter-semibold">Profile: </p>
                         <Select
                             getOptionLabel={option => option.name}
@@ -164,7 +166,7 @@ function Keycaps ({}) {
                             styles={selectTheme}
                         />
                     </div>
-                    <div className="flex flex-row ml-4">
+                    <div className="flex flex-row ml-4 my-2">
                         <p className="mr-4 mt-1 font-inter-semibold">Color: </p>
                         <Select
                             getOptionLabel={option => option.color}
@@ -182,7 +184,7 @@ function Keycaps ({}) {
                             styles={colorSelectTheme}
                         />
                     </div>
-                    <div className="flex flex-row ml-4">
+                    <div className="flex flex-row ml-4 my-2">
                         <p className="mr-4 mt-1 font-inter-semibold">Status: </p>
                         <Select
                             getOptionLabel={option => option.name}
@@ -199,8 +201,8 @@ function Keycaps ({}) {
                         />
                     </div>
                 </div>
-            </div>
-            <div className="flex flex-row flex-wrap justify-center">
+            </section>
+            <section className="flex flex-row flex-wrap justify-center">
                 {status === "loading" && (
                     <SkeletonKeycapList />
                     /* status ==== "loading" never actually activates
@@ -235,7 +237,7 @@ function Keycaps ({}) {
                         </div>
                     </Link>
                 ))}
-            </div>
+            </section>
         </Layout>
     )
 }
