@@ -5,7 +5,7 @@ const selectTheme = {
       color: state.isSelected ? "white" : "#222A31",
       background: state.isSelected ? `var(--secondary-color)` : "white",
       padding: "4px",
-      width: "100px",
+      width: "128px",
       textAlign: "center",
       borderRadius: 16,
       margin: "0 2px",
