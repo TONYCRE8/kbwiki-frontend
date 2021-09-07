@@ -1,5 +1,6 @@
 import {DATA} from "../components/dataFetch"
 import Layout from "../components/layout/layout"
+import {MdArrowDropDown, MdArrowDropUp} from "react-icons/md"
 
 import Link from "next/link"
 import Image from "next/image"
@@ -58,6 +59,18 @@ const getSwitches = async(key) => {
 }
 
 const Switches = () => {
+    const toggleMenu = () => {
+        if (toggle) {
+            setToggle(!toggle)
+        }
+        else {
+            setToggle(!toggle)
+        }
+        console.log(toggle)
+    }
+
+    const [toggle, setToggle] = useState(false)
+
     const queryClient = useQueryClient()
 
     const switches = DATA("switches")
@@ -74,7 +87,8 @@ const Switches = () => {
     return (
         <Layout>
           <section className="flex flex-col">
-            <p className="font-nunito-black uppercase">Filters V</p>
+          <button onClick={toggleMenu} className="font-nunito-black text-xl uppercase cursor-pointer flex flex-row" style={{color: "var(--text-color)"}}>Filters {toggle ? <MdArrowDropUp className="text-2xl"/> : <MdArrowDropDown className="text-2xl" /> }</button>
+          <div className={`${toggle ? "flex h-48 py-4" : "h-0"} transition-all duration-300 overflow-hidden flex-col border-l-8 border-solid rounded-md my-4`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
             <div className="flex flex-row ml-4 my-2">
                 <p className="mr-4 mt-1 font-inter-semibold">Manufacturer: </p>
                 <Select
@@ -123,6 +137,7 @@ const Switches = () => {
                     styles={selectTheme}
                 />
             </div>
+          </div>
           </section>
           <section className="flex flex-row flex-wrap justify-center">
             {status === "loading" && (
