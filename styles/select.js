@@ -52,24 +52,34 @@ const selectTheme = {
       color: "var(--text-color)"
     }),
 }
-const colorSelectTheme = {
-  option: (provided, state) => {
+
+const getData = (state) => {
     const data = DATA("keycap-colors").data
-    //This runs 12 times, making 12 seperate calls. We want 1 call for all the colors.
+    // A collection of colors:
+    // colors.color, colors.hex, colors.pantones, colors.id
     const color = data.find(el => el.color === state.label)
+    // Find the color name that matches the button label
     var hexColor = "var(--bg-accent)"
     if (color) {
       hexColor = `#${color.hex}`
     }
+    // set the singular hex color and pass it down
+    return {hexColor}
+    // This runs 12 times, making 12 seperate calls.
+    // We want 1 call for all the colors.
+}
 
+const colorSelectTheme = {
+  option: (provided, state) => {
+    const color = getData(state)
     return {
       color: state.isSelected ? "white" : "#222A31",
-      background: state.isSelected ? `${hexColor}` : "white",
+      background: state.isSelected ? `${color.hexColor}` : "white",
       padding: "4px",
       width: "100px",
       textAlign: "center",
       borderRadius: 16,
-      borderLeft: `${hexColor} solid 16px`,
+      borderLeft: `${color.hexColor} solid 16px`,
       margin: "2px",
       paddingRight: "16px",
       ":active": {

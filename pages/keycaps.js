@@ -126,7 +126,6 @@ function Keycaps ({}) {
     const [statusId, setStatusId] = useState(null)
     
     const {data, status} = useQuery(["keycaps", {manu: manuId}, {prof: profileId}, {col: colorId}, {stat: statusId}], getKeycaps)
-    console.log(colorSelectTheme) 
     return (
         <Layout>
             <section className="flex flex-col">
