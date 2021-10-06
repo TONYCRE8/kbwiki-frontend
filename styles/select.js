@@ -54,20 +54,13 @@ const selectTheme = {
 }
 
 const getData = (state) => {
-    const data = DATA("keycap-colors").data
-    // A collection of colors:
-    // colors.color, colors.hex, colors.pantones, colors.id
-    const color = data.find(el => el.color === state.label)
-    // Find the color name that matches the button label
-    var hexColor = "var(--bg-accent)"
-    if (color) {
-      hexColor = `#${color.hex}`
-    }
-    // set the singular hex color and pass it down
+    const color = DATA(`keycap-colors?color=${state.label}`)
+    var hexColor = null
+    color.data.map((col) => {
+      hexColor = `#${col.hex}`
+    })
     return {hexColor}
-    // This runs 12 times, making 12 seperate calls.
-    // We want 1 call for all the colors.
-}
+  }
 
 const colorSelectTheme = {
   option: (provided, state) => {
