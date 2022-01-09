@@ -4,15 +4,19 @@ const selectTheme = {
     option: (provided, state) => ({
       color: state.isSelected ? "white" : "#222A31",
       background: state.isSelected ? `var(--secondary-color)` : "white",
-      padding: "4px",
-      width: "128px",
+      padding: "4px 8px",
+      minWidth: "128px",
       textAlign: "center",
       borderRadius: 16,
-      margin: "0 2px",
+      margin: "2px",
       ":active": {
           backgroundColor: "var(--secondary-color)",
           color: "white"
       }
+    }),
+    selectContainer: (provided) => ({
+      display: "flex",
+      flexFlow: "row-reverse nowrap"
     }),
     control: (provided) => ({
       ...provided,
@@ -21,7 +25,7 @@ const selectTheme = {
     }),
     container: () => ({
       display: "flex",
-      flexFlow: "row-reverse wrap"
+      flexFlow: "row-reverse nowrap"
     }),
     dropdownIndicator: () => ({
       display: "none"
@@ -30,7 +34,7 @@ const selectTheme = {
       display: "none"
     }),
     indicatorsContainer: () => ({
-      width: 100
+      width: 64
     }),
     clearIndicator: (provided) => ({
       ...provided,

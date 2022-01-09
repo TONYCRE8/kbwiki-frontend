@@ -17,7 +17,7 @@ import {selectTheme, colorSelectTheme} from "../styles/select"
 const getKeycaps = async(key) => {
     const manuId = key.queryKey[1].manu
     const profileIds = key.queryKey[2].prof.map(id => `profile.id=${id}`)
-    const colorIds = key.queryKey[3].col.map(id => `colors.id=${id}`)
+    const colorIds = key.queryKey[3].col.map(id => `filter_colors.id=${id}`)
     const statId = key.queryKey[4].stat
 
     const profileQueryString = profileIds.join("&")
@@ -130,7 +130,7 @@ function Keycaps ({}) {
         <Layout>
             <section className="flex flex-col">
                 <button onClick={toggleMenu} className="font-nunito-black text-xl uppercase cursor-pointer flex flex-row" style={{color: "var(--text-color)"}}>Filters {toggle ? <MdArrowDropUp className="text-2xl"/> : <MdArrowDropDown className="text-2xl" /> }</button>
-                <div className={`${toggle ? "flex h-72 py-4" : "h-0"} transition-all duration-300 overflow-hidden flex-col border-l-8 border-solid rounded-md my-4`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
+                <div className={`${toggle ? "flex h-92 py-4" : "h-0"} transition-all duration-300 overflow-hidden flex-col border-l-8 border-solid rounded-md my-4`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
                     <div className="flex flex-row ml-4 my-2">
                         <p className="mr-4 mt-1 font-inter-semibold">Manufacturer: </p>
                         <Select
@@ -143,7 +143,7 @@ function Keycaps ({}) {
                             isClearable
                             menuIsOpen
                             onChange={value => setManuId(value ? value.id : null)}
-                            className="font-inter-regular"
+                            className="font-inter-regular flex reverse flex-nowrap"
                             styles={selectTheme}
                         />
                     </div>
