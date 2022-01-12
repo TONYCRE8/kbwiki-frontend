@@ -34,8 +34,24 @@ const ID = () => {
         return kit
     }
 
+    const splitColors = (data) => {
+        var string = data.includes('*') ? data.substring(1) : data
+        var colors = string.split('|')
+        var colorsData = []
+
+        colors.map(color => {
+            var hex = color.slice(0, 7)
+            var name = color.slice(8) == '' ? hex : color.slice(8)
+            colorsData.push({
+                'name': name,
+                'hex': hex
+            })
+        })
+        return colorsData;
+    }
+
     const copyURL = () => {
-        const el = document.createElement("incd kput")
+        const el = document.createElement("input")
         el.value = window.location.href
         document.body.appendChild(el)
         el.select()
@@ -44,14 +60,14 @@ const ID = () => {
         setCopied(true)
         setTimeout(() => {
             setCopied(false)
-        }, 3000)
+        }, 1000)
     }
     return (
         <Layout>
             {/* <div className="xl:w-3/5 w-2/3"> */}
             {!keycaps.loading && keycaps.data.map((s) => (
                 <div className="flex flex-col py-16" key={s.id}>
-                    <div className="flex flex-row justify-between items-end">
+                    <div className="flex md:flex-row flex-col-reverse justify-between md:items-end">
                         <h1>{s.name}</h1>
                         <small>Last edited: {s.updatedAt.slice(0,10)}</small>
                     </div>
@@ -103,6 +119,28 @@ const ID = () => {
                                     ))}</ul>
                                 </section>
                             </div>
+                            <div className='mb-4'>
+                                <h2 className="text-center text-lg tracking-wider">Colors featured</h2>
+                                <ul className='list-none flex flex-row flex-wrap justify-start'>
+                                    {splitColors(s.colors).map((c) => (
+                                        <li className='flex flex-col flex-wrap justify-center align-middle md:w-1/3 w-1/2 rounded-xl overflow-hidden' style={{border: "4px solid var(--bg-color)"}} key={c.name}>
+                                            <div className='h-8 w-full mx-auto' style={{background: c.hex}}></div>
+                                            {c.name == c.hex ? (
+                                                <div className="text-center p-1" style={{background: "var(--bg-accent)"}}>
+                                                    <p class="font-bold">{c.name}</p>
+                                                    <small>No color name</small>
+                                                </div>
+                                            ) : (
+                                                <div className="text-center p-1" style={{background: "var(--bg-accent)"}}>
+                                                    <p class="font-bold">{c.name}</p>
+                                                    <small>{c.hex}</small>
+                                                </div>
+                                            )}
+                                            
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                             <section className="flex justify-between">
                                 <button onClick={copyURL} className="w-1/2 mr-2 h-8 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--primary-color)"}}>{!copied ? "Share" : "Copied"}</button>
                                 <button className="w-1/2 ml-2 h-8 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--secondary-color)"}}>Edit Article</button>
@@ -113,7 +151,7 @@ const ID = () => {
             ))}
             {keycaps.loading && (
                 <SkeletonKeycap />
-            )}
+            )}  
         </Layout>
     )
 }
