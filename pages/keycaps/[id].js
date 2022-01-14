@@ -11,7 +11,9 @@ import SkeletonKeycap from "../../components/skeletons/skeletonKeycap"
 
 const ID = ({keycap}) => {
 
-    console.log('keycap', keycap)
+    const k = keycap.keycaps[0];
+
+    console.log('keycap', k)
 
     const router = useRouter()
     const { id } = router.query
@@ -71,24 +73,22 @@ const ID = ({keycap}) => {
     return (
         <Layout>
             <Head>
-                {!keycaps.loading && keycaps.data.map((s) => {
-                    <SEO
+                <SEO
 
-                        title={s.name}
-                        description={`kb.wiki's keycap information on the ${s.name} set. This is a ${s.manufacturer.name} set designed by ${s.designer}, which ${
+                    title={k.name}
+                    description={`kb.wiki's keycap information on the ${k.name} set. This is a ${k.manufacturer.name} set designed by ${k.designer}, which ${
 
-                            s.status.name == 'Completed' ? 'has been completed' :
-                            s.status.name == 'Shipping' ? 'is shipping to vendors' :
-                            s.status.name == 'Manufacturing' ? 'is being manufactured' :
-                            s.status.name == 'Group_Buy' ? 'is in group buy' :
-                            s.status.name == 'Interest_Check' ? 'is in interest check' : ''
+                        k.status.name == 'Completed' ? 'has been completed' :
+                        k.status.name == 'Shipping' ? 'is shipping to vendors' :
+                        k.status.name == 'Manufacturing' ? 'is being manufactured' :
+                        k.status.name == 'Group_Buy' ? 'is in group buy' :
+                        k.status.name == 'Interest_Check' ? 'is in interest check' : ''
 
-                        }.`}
-                        keywords={[s.name, `${s.name} keycaps`, `${s.name} keycap set`, `${s.profile.name}`]}
-                        image={s.thumb.formats.medium.url}
+                    }.`}
+                    keywords={[k.name, `${k.name} keycaps`, `${k.name} keycap set`, `${k.profile.name} keycaps set`, `${k.manufacturer.name} keycap set`]}
+                    image={k.thumb.formats.medium.url}
 
-                    />
-                })}
+                />
             </Head>
             {!keycaps.loading && keycaps.data.map((s) => (
                 <>
@@ -184,12 +184,12 @@ const ID = ({keycap}) => {
 }
 
 export async function getStaticProps({params}) {
-    console.log('params:', params)
+    console.log('static props:', params)
     const data = await getKeycap(params.id)
     return {
         props: {
             keycap: {
-                ...data[0]
+                ...data
             }
         }
     }
