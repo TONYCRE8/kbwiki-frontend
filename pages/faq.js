@@ -1,5 +1,5 @@
 import Layout from "../components/layout/layout"
-import {DATA} from "../components/dataFetch"
+import {DATA} from "../lib/dataFetch"
 
 import { useState } from "react"
 

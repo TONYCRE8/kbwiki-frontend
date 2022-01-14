@@ -1,4 +1,4 @@
-import {DATA} from "../components/dataFetch"
+import {DATA} from "../lib/dataFetch"
 
 const selectTheme = {
     option: (provided, state) => ({

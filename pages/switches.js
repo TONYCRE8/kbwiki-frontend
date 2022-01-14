@@ -1,4 +1,4 @@
-import {DATA} from "../components/dataFetch"
+import {DATA} from "../lib/dataFetch"
 import Layout from "../components/layout/layout"
 import {MdArrowDropDown, MdArrowDropUp} from "react-icons/md"
 

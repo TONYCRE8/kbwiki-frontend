@@ -5,10 +5,14 @@ import React, { useRef, useState } from 'react'
 
 import Layout from "../../components/layout/layout"
 import SEO from "../../components/layout/seo"
-import { DATA } from "../../components/dataFetch"
+import { DATA } from "../../lib/dataFetch"
+import { getAllKeycapsBySlug, getKeycap } from "../../lib/api"
 import SkeletonKeycap from "../../components/skeletons/skeletonKeycap"
 
-const ID = () => {
+const ID = ({keycap}) => {
+
+    console.log('keycap', keycap)
+
     const router = useRouter()
     const { id } = router.query
 
@@ -67,7 +71,6 @@ const ID = () => {
     return (
         <Layout>
             <Head>
-                <SEO title="eee" />
                 {!keycaps.loading && keycaps.data.map((s) => {
                     <SEO
 
@@ -178,6 +181,27 @@ const ID = () => {
             )}  
         </Layout>
     )
+}
+
+export async function getStaticProps({params}) {
+    console.log('params:', params)
+    const data = await getKeycap(params.id)
+    return {
+        props: {
+            keycap: {
+                ...data[0]
+            }
+        }
+    }
+}
+
+export async function getStaticPaths() {
+    const allKeycaps = await getAllKeycapsBySlug()
+    console.log('static paths:', allKeycaps)
+    return {
+      paths: allKeycaps?.map((keycap) => `/keycaps/${keycap.slug}`) || [],
+      fallback: true,
+    }
 }
 
 export default ID

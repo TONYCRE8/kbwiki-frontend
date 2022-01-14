@@ -3,7 +3,8 @@ import Image from "next/image"
 import {MdArrowDropDown, MdArrowDropUp} from "react-icons/md"
 
 import Layout from "../components/layout/layout"
-import {DATA} from "../components/dataFetch"
+import {DATA} from "../lib/dataFetch"
+import { getAllKeycaps } from "../lib/api"
 
 import SkeletonKeycapList from "../components/skeletons/skeletonKeycapList"
 
@@ -15,6 +16,7 @@ import axios from "axios"
 import {selectTheme, colorSelectTheme} from "../styles/select"
 
 const getKeycaps = async(key) => {
+    console.log(key)
     const manuId = key.queryKey[1].manu
     const profileIds = key.queryKey[2].prof.map(id => `profile.id=${id}`)
     const colorIds = key.queryKey[3].col.map(id => `filter_colors.id=${id}`)
@@ -95,7 +97,14 @@ const getKeycaps = async(key) => {
     return data.data
 }
 
-function Keycaps ({}) {
+export default function Keycaps ({allKeycaps}) {
+    /*
+        console.log(allKeycaps)
+        ------------------------
+        this does work,
+        but we can't figure out how to get the page to use this data with useQuery
+    */
+
     const toggleMenu = () => {
         if (toggle) {
             setToggle(!toggle)
@@ -126,6 +135,9 @@ function Keycaps ({}) {
     const [statusId, setStatusId] = useState(null)
     
     const {data, status} = useQuery(["keycaps", {manu: manuId}, {prof: profileId}, {col: colorId}, {stat: statusId}], getKeycaps)
+
+    console.log(data)
+
     return (
         <Layout>
             <section className="flex flex-col">
@@ -218,7 +230,6 @@ function Keycaps ({}) {
                         <p style={{color: "var(--text-color)"}}>Nothing matches your search! Select some different filters and try again!</p>
                     </div>
                 )}
-
                 {status === "success" && data.map((s) => (
                     <Link href={`/keycaps/${s.slug}`} key={s.id}>
                         <div className="w-72 m-4 cursor-pointer shadow-lg transition transform duration-150 hover:-translate-y-1">
@@ -241,4 +252,9 @@ function Keycaps ({}) {
     )
 }
 
-export default Keycaps
+export async function getStaticProps() {
+    const allKeycaps = (await getAllKeycaps() || 'Error')
+    return {
+        props: { allKeycaps }
+    }
+}

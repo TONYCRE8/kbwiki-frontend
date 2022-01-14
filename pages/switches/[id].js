@@ -3,7 +3,7 @@ import Image from "next/image"
 import React, { useRef, useState } from 'react'
 
 import Layout from "../../components/layout/layout"
-import { DATA } from "../../components/dataFetch"
+import { DATA } from "../../lib/dataFetch"
 import SkeletonSwitch from '../../components/skeletons/skeletonSwitch'
 
 const ID = () => {
