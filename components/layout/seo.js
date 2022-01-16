@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 
 const SEO = ({title, description, keywords, image, article_data}) => {
     /* 
@@ -46,13 +47,13 @@ const SEO = ({title, description, keywords, image, article_data}) => {
                 "name": "kb wiki",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": '../../public/logo-beta.svg'
+                    "url": 'https://kb.wiki/public/logo-beta.svg'
                 }
             }
         }
     }
     return (
-        <>
+        <Head>
             {/* meta */}
             <title>{title} | kb.wiki</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
@@ -74,7 +75,7 @@ const SEO = ({title, description, keywords, image, article_data}) => {
                     {JSON.stringify(structuredData)}
                 </script>
             ) : ''}
-        </>
+        </Head>
     )
 }
 
