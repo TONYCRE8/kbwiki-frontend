@@ -23,35 +23,6 @@ const SEO = ({title, description, keywords, image, article_data}) => {
     if (!image) { /* Set the default image if there is none currently */
         image = 'https://res.cloudinary.com/tonycre8/image/upload/v1629292666/kbwiki-twitter_flrej3.png';
     }
-    if (article_data) { /* If it's an article i.e. keycaps, switches, etc - then set some structured data up */
-        var structuredData = {
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "https://kb.wiki/" + article_data.type 
-            },
-            "headline": title,
-            "image": [
-                image
-            ],
-            "datePublished": article_data.datePublished,
-            "dateModified": article_data.dateModified,
-            "author": {
-                "@type": "Organization",
-                "name": "kb wiki",
-                "url": "https://kb.wiki/"
-            },
-            "publisher": {
-                "@type": "kb.wiki",
-                "name": "kb wiki",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": 'https://kb.wiki/public/logo-beta.svg'
-                }
-            }
-        }
-    }
     return (
         <Head>
             {/* meta */}
@@ -69,14 +40,43 @@ const SEO = ({title, description, keywords, image, article_data}) => {
             <meta property="twitter:description" content={description} />
             <meta property="twitter:card" content="summary_large_image" />
             <meta property="twitter:image" content={image} />
-            {/* Google search */}
+            {/* Google search - causing problems */}
             {article_data ? (
-                <script type="application/ld+json">
-                    {JSON.stringify(structuredData)}
+                <script type="application/ld+json" dangerouslySetInnerHTML={{__html: `
+                
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://kb.wiki/${article_data.type}"
+                    },
+                    "headline": "${title}",
+                    "image": [
+                        "https://kb.wiki/${image}"
+                    ],
+                    "datePublished": "${article_data.datePublished}",
+                    "dateModified": "${article_data.dateModified}",
+                    "author": {
+                        "@type": "Organization",
+                        "name": "kb wiki",
+                        "url": "https://kb.wiki/"
+                    },
+                    "publisher": {
+                        "@type": "kb.wiki",
+                        "name": "kb wiki",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": 'https://kb.wiki/public/logo-beta.svg'
+                        }
+                    }
+                }
+
+                `}}>
                 </script>
-            ) : ''}
+            ) : null}
         </Head>
     )
 }
-
+ 
 export default SEO
