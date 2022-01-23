@@ -22,69 +22,17 @@ const SEO = ({title, description, keywords, image, article_data}) => {
         keywords.join(',')
     }
     if (!image) { /* Set the default image if there is none currently */
-        image.src = 'https://res.cloudinary.com/tonycre8/image/upload/v1629292666/kbwiki-twitter_flrej3.png'
-        image.alt = 'kb wiki logo'
-        image.mime = "image/png"
-        image.width = 800
-        image.height = 414
+        image = {
+            src: 'https://res.cloudinary.com/tonycre8/image/upload/v1629292666/kbwiki-twitter_flrej3.png',
+            alt: 'kb wiki logo',
+            mime: 'image/png',
+            width: 800,
+            height: 414
+        }
     }
     return (
         <Head>
             <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
-            {/* {article_data ? (
-                <NextSeo
-                title={`${title} | kb.wiki`}
-                description={description}
-                openGraph={{
-                    title: `${title} | kb.wiki`,
-                    description: description,
-                    url: 'https://kb.wiki/',
-                    site_name: 'kb wiki',
-                    images: [
-                        {
-                            url: image.src,
-                            alt: image.alt,
-                            mime: image.mime,
-                            width: image.width,
-                            height: image.height
-                        }
-                    ],
-                    type: 'article',
-                    article: {
-                        modifiedTime: article_data.dateModified,
-                        publishedTime: article_data.datePublished
-                    }
-                }}
-                twitter={{
-                    site: '@kb.wiki',
-                    cardType: 'summary_large_image'
-                }}
-                />
-            ) : (
-                <NextSeo
-                    title={`${title} | kb.wiki`}
-                    description={description}
-                    openGraph={{
-                        title: `${title} | kb.wiki`,
-                        description: description,
-                        url: 'https://kb.wiki/',
-                        site_name: 'kb wiki',
-                        images: [
-                            {
-                                url: image.src,
-                                alt: image.alt,
-                                mime: image.mime,
-                                width: image.width,
-                                height: image.height
-                            }
-                        ]
-                    }}
-                    twitter={{
-                        site: '@kb.wiki',
-                        cardType: 'summary_large_image'
-                    }}
-                />
-            )} */}
             <meta name="description" content={description} />
             <meta name="keywords" content={keywords} />
             <meta property="og:title" content={`${title} | kb.wiki`} key="facebook title" />
@@ -95,7 +43,7 @@ const SEO = ({title, description, keywords, image, article_data}) => {
             <meta property="twitter:description" content={description} />
             <meta property="twitter:card" content="summary_large_image" />
             <meta property="twitter:image" content={image} />
-            {/* {article_data ? (
+            {article_data ? (
                 <script type="application/ld+json" dangerouslySetInnerHTML={{__html: `
                 
                 {
@@ -128,7 +76,7 @@ const SEO = ({title, description, keywords, image, article_data}) => {
 
                 `}}>
                 </script>
-            ) : null} */}
+            ) : null}
         </Head>
     )
 }
