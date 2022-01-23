@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import {NextSeo} from 'next-seo'
 
 const SEO = ({title, description, keywords, image, article_data}) => {
     /* 
@@ -21,27 +22,80 @@ const SEO = ({title, description, keywords, image, article_data}) => {
         keywords.join(',')
     }
     if (!image) { /* Set the default image if there is none currently */
-        image = 'https://res.cloudinary.com/tonycre8/image/upload/v1629292666/kbwiki-twitter_flrej3.png';
+        image.src = 'https://res.cloudinary.com/tonycre8/image/upload/v1629292666/kbwiki-twitter_flrej3.png'
+        image.alt = 'kb wiki logo'
+        image.mime = "image/png"
+        image.width = 800
+        image.height = 414
     }
     return (
         <Head>
-            {/* meta */}
-            <title>{title} | kb.wiki</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+            {/* {article_data ? (
+                <NextSeo
+                title={`${title} | kb.wiki`}
+                description={description}
+                openGraph={{
+                    title: `${title} | kb.wiki`,
+                    description: description,
+                    url: 'https://kb.wiki/',
+                    site_name: 'kb wiki',
+                    images: [
+                        {
+                            url: image.src,
+                            alt: image.alt,
+                            mime: image.mime,
+                            width: image.width,
+                            height: image.height
+                        }
+                    ],
+                    type: 'article',
+                    article: {
+                        modifiedTime: article_data.dateModified,
+                        publishedTime: article_data.datePublished
+                    }
+                }}
+                twitter={{
+                    site: '@kb.wiki',
+                    cardType: 'summary_large_image'
+                }}
+                />
+            ) : (
+                <NextSeo
+                    title={`${title} | kb.wiki`}
+                    description={description}
+                    openGraph={{
+                        title: `${title} | kb.wiki`,
+                        description: description,
+                        url: 'https://kb.wiki/',
+                        site_name: 'kb wiki',
+                        images: [
+                            {
+                                url: image.src,
+                                alt: image.alt,
+                                mime: image.mime,
+                                width: image.width,
+                                height: image.height
+                            }
+                        ]
+                    }}
+                    twitter={{
+                        site: '@kb.wiki',
+                        cardType: 'summary_large_image'
+                    }}
+                />
+            )} */}
             <meta name="description" content={description} />
             <meta name="keywords" content={keywords} />
-            {/* og */}
             <meta property="og:title" content={`${title} | kb.wiki`} key="facebook title" />
             <meta property="og:description" content={description} />
             <meta property="og:url" content="" />
             <meta property="og:image" content={image} />
-            {/* twitter */}
             <meta property="twitter:title" content={`${title} | kb.wiki`} key="twitter title" />
             <meta property="twitter:description" content={description} />
             <meta property="twitter:card" content="summary_large_image" />
             <meta property="twitter:image" content={image} />
-            {/* Google search - causing problems */}
-            {article_data ? (
+            {/* {article_data ? (
                 <script type="application/ld+json" dangerouslySetInnerHTML={{__html: `
                 
                 {
@@ -74,7 +128,7 @@ const SEO = ({title, description, keywords, image, article_data}) => {
 
                 `}}>
                 </script>
-            ) : null}
+            ) : null} */}
         </Head>
     )
 }

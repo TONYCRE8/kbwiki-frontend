@@ -66,6 +66,8 @@ const ID = ({keycap}) => {
         setTimeout(() => {
             setCopied(false)
         }, 1000)
+
+        console.log(k.thumb)
     }
     return (
         <Layout>
@@ -82,7 +84,13 @@ const ID = ({keycap}) => {
 
                 }.`}
                 keywords={[k.name, `${k.name} keycaps`, `${k.name} keycap set`, `${k.profile.name} keycaps set`, `${k.manufacturer.name} keycap set`]}
-                image={k.thumb.formats.medium.url}
+                image={{
+                    src: k.thumb.formats.medium.url,
+                    alt: `${k.name} keycap set render`,
+                    mime: k.thumb.formats.medium.mime,
+                    width: k.thumb.formats.medium.width,
+                    height: k.thumb.formats.medium.height
+                }}
                 article_data={{type: 'keycaps', dateModified: k.updatedAt, datePublished: k.published_at}}
 
             />
