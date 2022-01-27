@@ -289,7 +289,7 @@ export async function getStaticPaths() {
     console.log('static paths:', allKeycaps)
     return {
       paths: allKeycaps?.map((keycap) => `/keycaps/${keycap.slug}`) || [],
-      fallback: 'blocking',
+      fallback: 'blocking'
     }
 }
 
