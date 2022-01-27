@@ -33,6 +33,7 @@ const SEO = ({title, description, keywords, image, article_data}) => {
     return (
         <Head>
             <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+            <title>{title} | kb.wiki</title>
             <meta name="description" content={description} />
             <meta name="keywords" content={keywords} />
             <meta property="og:title" content={`${title} | kb.wiki`} key="facebook title" />
