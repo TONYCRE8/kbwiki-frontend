@@ -142,7 +142,7 @@ export default function Keycaps ({allKeycaps}) {
         <Layout>
             <section className="flex flex-col">
                 <button onClick={toggleMenu} className="font-nunito-black text-xl uppercase cursor-pointer flex flex-row" style={{color: "var(--text-color)"}}>Filters {toggle ? <MdArrowDropUp className="text-2xl"/> : <MdArrowDropDown className="text-2xl" /> }</button>
-                <div className={`${toggle ? "flex h-92 py-4" : "h-0"} transition-all duration-300 overflow-hidden flex-col border-l-8 border-solid rounded-md my-4`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
+                <div className={`${toggle ? "flex h-92 py-4" : "hidden"} transition-all duration-300 flex-col border-l-8 border-solid rounded-md my-4`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
                     <div className="flex flex-row ml-4 my-2">
                         <p className="mr-4 mt-1 font-inter-semibold">Manufacturer: </p>
                         <Select
@@ -155,7 +155,7 @@ export default function Keycaps ({allKeycaps}) {
                             isClearable
                             menuIsOpen
                             onChange={value => setManuId(value ? value.id : null)}
-                            className="font-inter-regular flex reverse flex-nowrap"
+                            className="font-inter-regular"
                             styles={selectTheme}
                         />
                     </div>
@@ -232,7 +232,7 @@ export default function Keycaps ({allKeycaps}) {
                 )}
                 {status === "success" && data.map((s) => (
                     <Link href={`/keycaps/${s.slug}`} key={s.id}>
-                        <div className="w-72 m-4 cursor-pointer shadow-lg transition transform duration-150 hover:-translate-y-1">
+                        <div className="w-72 m-4 rounded-br-lg  cursor-pointer shadow-lg transition transform duration-150 hover:-translate-y-1">
                             <Image className="rounded-t-3xl object-cover w-full" width={288} height={72} src={`${process.env.REACT_APP_STRAPI_API}${s.thumb.formats.small.url}`} />
                             <div className="text-right">
                                 <h2 className="font-nunito-black text-2xl leading-6">{s.name}</h2>
