@@ -15,7 +15,7 @@ function Custom500() {
                         Whoops! Something went wrong! This page not exist or be broken, please report it to us on Discord!
                     </p>
                     <Link href="/">
-                        <button className="cursor-pointer mt-8 h-8 px-4 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--secondary-color)"}}>Let's get you back to safety, shall we?</button>
+                        <button className="cursor-pointer mt-8 h-8 px-4 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--secondary-color)"}}>Let&apos;s get you back to safety, shall we?</button>
                     </Link>
                 </div>
                 <div className='w-1/2'>
