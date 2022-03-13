@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/router"
 import {MdArrowDropDown, MdArrowDropUp} from "react-icons/md"
 
 import Layout from "../components/layout/layout"
@@ -10,12 +11,13 @@ import SkeletonKeycapList from "../components/skeletons/skeletonKeycapList"
 
 import Select from "react-select"
 import {useQuery, useQueryClient} from "react-query"
-import {useState, useRef} from "react"
+import {useEffect, useState} from "react"
 import axios from "axios"
 
 import {selectTheme, colorSelectTheme} from "../styles/select"
 
 const getKeycaps = async(key) => {
+    console.log(key)
     const manuId = key.queryKey[1].manu
     const profileIds = key.queryKey[2].prof.map(id => `profile.id=${id}`)
     const colorIds = key.queryKey[3].col.map(id => `filter_colors.id=${id}`)
@@ -24,8 +26,7 @@ const getKeycaps = async(key) => {
     const profileQueryString = profileIds.join("&")
     const colorQueryString = colorIds.join("&")
 
-    let urlParams = new URLSearchParams(document.location.search);
-    let page = urlParams.get("page") == null ? 1 : parseInt(urlParams.get("page"));
+    const page = key.queryKey[5].page
 
     let start = (page * 10) - 10 // set every 10 to 20 when in prod
 
@@ -41,6 +42,34 @@ export default function Keycaps ({allKeycaps}) {
         this does work,
         but we can't figure out how to get the page to use this data with useQuery
     */
+
+    console.log(allKeycaps)
+
+    const router = useRouter()
+
+    const pageToggle = (dir) => {
+    
+        let pageNo = router.query.page == null ? 1 : router.query.page
+    
+        if (dir == 'next') {
+            if (data.length == 10) {
+                pageNo++
+            }
+        } else {
+            if (pageNo != 1) {
+                pageNo--
+            }
+        }
+
+        router.push(
+            {
+                pathname: '/keycaps',
+                query: {page: pageNo}
+            },
+            null,
+            {shallow: true}
+        )
+    }
 
     const toggleMenu = () => {
         if (toggle) {
@@ -70,8 +99,10 @@ export default function Keycaps ({allKeycaps}) {
     const [profileId, setProfileId] = useState([])
     const [colorId, setColorId] = useState([])
     const [statusId, setStatusId] = useState(null)
-    
-    const {data, status} = useQuery(["keycaps", {manu: manuId}, {prof: profileId}, {col: colorId}, {stat: statusId}], getKeycaps)
+
+    const curPage = router.query.page == null ? 1 : router.query.page
+
+    const {data, status} = useQuery(["keycaps", {manu: manuId}, {prof: profileId}, {col: colorId}, {stat: statusId}, {page: curPage}], getKeycaps)
 
     console.log(data)
 
@@ -184,6 +215,14 @@ export default function Keycaps ({allKeycaps}) {
                         </div>
                     </Link>
                 ))}
+            </section>
+            <section className="flex flex-row flex-wrap justify-between">
+                <div className="cursor-pointer" onClick={() => pageToggle('prev')}>
+                    Prev
+                </div>
+                <div className="cursor-pointer" onClick={() => pageToggle('next')}>
+                    Next
+                </div>
             </section>
         </Layout>
     )

@@ -1,9 +1,10 @@
-import {DATA} from "../lib/dataFetch"
-import Layout from "../components/layout/layout"
-import {MdArrowDropDown, MdArrowDropUp} from "react-icons/md"
-
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/router"
+import {MdArrowDropDown, MdArrowDropUp} from "react-icons/md"
+
+import {DATA} from "../lib/dataFetch"
+import Layout from "../components/layout/layout"
 
 import SkeletonSwitchList from "../components/skeletons/skeletonSwitchList"
 
@@ -19,17 +20,43 @@ const getSwitches = async(key) => {
   const typeId = key.queryKey[2].type
   const rangeId = key.queryKey[3].range
 
-  let urlParams = new URLSearchParams(document.location.search);
-  let page = urlParams.get("page") == null ? 1 : parseInt(urlParams.get("page"));
+  const page = key.queryKey[4].page
 
-  let start = (page * 10) - 10 // set every 10 to 20 when in prod
+  let start = (page * 1) - 1 // set every 1 to 20 when in prod
 
   const data = await axios(`
-    ${process.env.REACT_APP_STRAPI_API}/switches?${rangeId ? 'actuation_range.id=' + rangeId + '&' : ''}${typeId ? 'type.id=' + rangeId + '&' : ''}${manuId ? 'manufacturer.id=' + manuId + '&' : ''}_start=${start}&_limit=10`)
+    ${process.env.REACT_APP_STRAPI_API}/switches?${rangeId ? 'actuation_range.id=' + rangeId + '&' : ''}${typeId ? 'type.id=' + rangeId + '&' : ''}${manuId ? 'manufacturer.id=' + manuId + '&' : ''}_start=${start}&_limit=1`)
   return data.data
 }
 
 const Switches = () => {
+
+    const router = useRouter()
+
+    const pageToggle = (dir) => {
+    
+        let pageNo = router.query.page == null ? 1 : router.query.page
+    
+        if (dir == 'next') {
+          if (data.length == 10) {
+              pageNo++
+          }
+        } else {
+            if (pageNo != 1) {
+                pageNo--
+            }
+        }
+
+        router.push(
+            {
+                pathname: '/switches',
+                query: {page: pageNo}
+            },
+            null,
+            {shallow: true}
+        )
+    }
+
     const toggleMenu = () => {
         if (toggle) {
             setToggle(!toggle)
@@ -54,7 +81,9 @@ const Switches = () => {
     const [typeId, setTypeId] = useState(null)
     const [rangeId, setRangeId] = useState(null)
 
-    const {data, status} = useQuery(["switches", {manu: manuId}, {type: typeId}, {range: rangeId}], getSwitches)
+    const curPage = router.query.page == null ? 1 : router.query.page
+
+    const {data, status} = useQuery(["switches", {manu: manuId}, {type: typeId}, {range: rangeId}, {page: curPage}], getSwitches)
     return (
         <Layout>
           <section className="flex flex-col">
@@ -138,6 +167,14 @@ const Switches = () => {
                   </div>
               </Link>
             ))}
+          </section>
+          <section className="flex flex-row flex-wrap justify-between">
+              <div className="cursor-pointer" onClick={() => pageToggle('prev')}>
+                  Prev
+              </div>
+              <div className="cursor-pointer" onClick={() => pageToggle('next')}>
+                  Next
+              </div>
           </section>
         </Layout>
     )
