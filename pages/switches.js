@@ -19,42 +19,13 @@ const getSwitches = async(key) => {
   const typeId = key.queryKey[2].type
   const rangeId = key.queryKey[3].range
 
-  if (manuId && typeId && rangeId) {
-    const data = await axios(`${process.env.REACT_APP_STRAPI_API}/switches?actuation_range.id=${rangeId}&type.id=${typeId}&manufacturer.id=${manuId}`)
-    return data.data
-  }
+  let urlParams = new URLSearchParams(document.location.search);
+  let page = urlParams.get("page") == null ? 1 : parseInt(urlParams.get("page"));
 
-  if (typeId && manuId) {
-    const data = await axios(`${process.env.REACT_APP_STRAPI_API}/switches?manufacturer.id=${manuId}&type.id=${typeId}`)
-    return data.data
-  }
+  let start = (page * 10) - 10 // set every 10 to 20 when in prod
 
-  if (rangeId && manuId) {
-    const data = await axios(`${process.env.REACT_APP_STRAPI_API}/switches?actuation_range.id=${rangeId}&manufacturer.id=${manuId}`)
-    return data.data
-  }
-
-  if (rangeId && typeId) {
-    const data = await axios(`${process.env.REACT_APP_STRAPI_API}/switches?actuation_range.id=${rangeId}&type.id=${typeId}`)
-    return data.data
-  }
-
-  if (rangeId) {
-    const data = await axios(`${process.env.REACT_APP_STRAPI_API}/switches?actuation_range.id=${rangeId}`)
-    return data.data
-  }
-
-  if (typeId) {
-    const data = await axios(`${process.env.REACT_APP_STRAPI_API}/switches?type.id=${typeId}`)
-    return data.data
-  }
-
-  if (manuId) {
-    const data = await axios(`${process.env.REACT_APP_STRAPI_API}/switches?manufacturer.id=${manuId}`)
-    return data.data
-  }
-
-  const data = await axios(`${process.env.REACT_APP_STRAPI_API}/switches`)
+  const data = await axios(`
+    ${process.env.REACT_APP_STRAPI_API}/switches?${rangeId ? 'actuation_range.id=' + rangeId + '&' : ''}${typeId ? 'type.id=' + rangeId + '&' : ''}${manuId ? 'manufacturer.id=' + manuId + '&' : ''}_start=${start}&_limit=10`)
   return data.data
 }
 

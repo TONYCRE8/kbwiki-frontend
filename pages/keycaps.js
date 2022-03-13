@@ -16,7 +16,6 @@ import axios from "axios"
 import {selectTheme, colorSelectTheme} from "../styles/select"
 
 const getKeycaps = async(key) => {
-    console.log(key)
     const manuId = key.queryKey[1].manu
     const profileIds = key.queryKey[2].prof.map(id => `profile.id=${id}`)
     const colorIds = key.queryKey[3].col.map(id => `filter_colors.id=${id}`)
@@ -25,75 +24,13 @@ const getKeycaps = async(key) => {
     const profileQueryString = profileIds.join("&")
     const colorQueryString = colorIds.join("&")
 
-    // Refine this whole thing
+    let urlParams = new URLSearchParams(document.location.search);
+    let page = urlParams.get("page") == null ? 1 : parseInt(urlParams.get("page"));
 
-    if (manuId && profileQueryString && colorQueryString) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}&${profileQueryString}&${colorQueryString}`)
-        return data.data
-    }
+    let start = (page * 10) - 10 // set every 10 to 20 when in prod
 
-    if (manuId && statId && colorQueryString) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}&status.id=${statId}&${colorQueryString}`)
-        return data.data
-    }
-
-    if (manuId && profileQueryString && statId) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}&${profileQueryString}&status.id=${statId}`)
-        return data.data
-    }
-
-    if (statId && profileQueryString && colorQueryString) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?status.id=${statId}&${profileQueryString}&${colorQueryString}`)
-        return data.data
-    }
-
-    if (manuId && profileQueryString) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}&${profileQueryString}`)
-        return data.data
-    }
-
-    if (manuId && colorQueryString) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}&${colorQueryString}`)
-        return data.data
-    }
-
-    if (profileQueryString && colorQueryString) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?${profileQueryString}&${colorQueryString}`)
-        return data.data
-    }
-
-    if (statId && profileQueryString) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${statId}&${profileQueryString}`)
-        return data.data
-    }
-
-    if (statId && colorQueryString) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${statId}&${colorQueryString}`)
-        return data.data
-    }
-
-    if (statId && manuId) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?status.id=${statId}&manufacturer.id=${manuId}`)
-        return data.data
-    }
-
-    if (manuId) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?manufacturer.id=${manuId}`)
-        return data.data
-    }
-    if (profileQueryString) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?${profileQueryString}`)
-        return data.data
-    }
-    if (colorQueryString) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?${colorQueryString}`)
-        return data.data
-    }
-    if (statId) {
-        const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps?status.id=${statId}`)
-        return data.data
-    }
-    const data = await axios(`${process.env.REACT_APP_STRAPI_API}/keycaps`)
+    const data = await axios(`
+        ${process.env.REACT_APP_STRAPI_API}/keycaps?${manuId ? 'manufacturer.id=' + manuId + '&' : ''}${profileQueryString ? profileQueryString + '&' : ''}${colorQueryString ? colorQueryString + '&' : ''}_start=${start}&_limit=10`)
     return data.data
 }
 
