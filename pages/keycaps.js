@@ -17,7 +17,6 @@ import axios from "axios"
 import {selectTheme, colorSelectTheme} from "../styles/select"
 
 const getKeycaps = async(key) => {
-    console.log(key)
     const manuId = key.queryKey[1].manu
     const profileIds = key.queryKey[2].prof.map(id => `profile.id=${id}`)
     const colorIds = key.queryKey[3].col.map(id => `filter_colors.id=${id}`)
@@ -36,12 +35,6 @@ const getKeycaps = async(key) => {
 }
 
 export default function Keycaps ({allKeycaps}) {
-    /*
-        console.log(allKeycaps)
-        ------------------------
-        this does work,
-        but we can't figure out how to get the page to use this data with useQuery
-    */
 
     console.log(allKeycaps)
 
@@ -85,15 +78,10 @@ export default function Keycaps ({allKeycaps}) {
 
     const queryClient = useQueryClient()
 
-    const manufacturer = DATA("keycap-manufacturers")
-    const profile = DATA("keycap-profiles")
-    const color = DATA("keycap-colors")
-    const itemStatus = DATA("statuses")
-
-    const manufacturers = manufacturer.data
-    const profiles = profile.data
-    const colors = color.data
-    const statuses = itemStatus.data
+    const manufacturers = DATA("keycap-manufacturers").data
+    const profiles = DATA("keycap-profiles").data
+    const colors = DATA("keycap-colors").data
+    const statuses = DATA("statuses").data
 
     const [manuId, setManuId] = useState(null)
     const [profileId, setProfileId] = useState([])

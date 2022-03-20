@@ -14,6 +14,7 @@ import {useState} from "react"
 import axios from "axios"
 
 import {selectTheme} from "../styles/select"
+import { getAllSwitches } from "../lib/api"
 
 const getSwitches = async(key) => {
   const manuId = key.queryKey[1].manu
@@ -22,14 +23,16 @@ const getSwitches = async(key) => {
 
   const page = key.queryKey[4].page
 
-  let start = (page * 1) - 1 // set every 1 to 20 when in prod
+  let start = (page * 10) - 10 // set every 1 to 20 when in prod
 
   const data = await axios(`
-    ${process.env.REACT_APP_STRAPI_API}/switches?${rangeId ? 'actuation_range.id=' + rangeId + '&' : ''}${typeId ? 'type.id=' + rangeId + '&' : ''}${manuId ? 'manufacturer.id=' + manuId + '&' : ''}_start=${start}&_limit=1`)
+    ${process.env.REACT_APP_STRAPI_API}/switches?${rangeId ? 'actuation_range.id=' + rangeId + '&' : ''}${typeId ? 'type.id=' + rangeId + '&' : ''}${manuId ? 'manufacturer.id=' + manuId + '&' : ''}_start=${start}&_limit=10`)
   return data.data
 }
 
-const Switches = () => {
+export default function Switches ({allSwitches}) {
+
+    /* follow same format as keycaps.js (use static queries) */
 
     const router = useRouter()
 
@@ -70,8 +73,6 @@ const Switches = () => {
     const [toggle, setToggle] = useState(false)
 
     const queryClient = useQueryClient()
-
-    const switches = DATA("switches")
 
     const manufacturers = DATA("switch-manufacturers").data
     const types = DATA("switch-types").data
@@ -180,4 +181,9 @@ const Switches = () => {
     )
 }
 
-export default Switches
+export async function getStaticProps() {
+    const allSwitches = (await getAllSwitches() || 'Error')
+    return {
+        props: { allSwitches }
+    }
+}
