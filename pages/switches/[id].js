@@ -205,6 +205,7 @@ const ID = ({_switch}) => {
 }
 
 export async function getStaticProps({params}) {
+    console.log('static props:', params)
     const data = await getSwitch(params.id)
     return {
         props: {
@@ -218,6 +219,7 @@ export async function getStaticProps({params}) {
 
 export async function getStaticPaths() {
     const allSwitches = await getAllSwitchesBySlug()
+    console.log('static paths:', allSwitches)
     return {
         paths: allSwitches?.map((_switch) => `/switches/${_switch.slug}`) || [],
         fallback: 'blocking',

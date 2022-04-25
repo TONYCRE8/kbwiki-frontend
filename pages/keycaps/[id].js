@@ -28,7 +28,7 @@ const ID = ({keycap}) => {
         convertedDate.setMonth(convertedDate.getMonth()+data.manufacturer.lead)
         var formattedDate = convertedDate.toISOString().slice(0,7)
         var year = formattedDate.slice(0,4)
-        var quarter = Math.round(formattedDate.slice(5,7) / 3)
+        var quarter = Math.round(formattedDate.slice(5,7) / 4) == 0 ? 1 : Math.round(formattedDate.slice(5,7) / 4)
         var newDate = year.concat(" Q", quarter)
         return newDate
     }
