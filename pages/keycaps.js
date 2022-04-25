@@ -116,21 +116,21 @@ export default function Keycaps ({allKeycaps}) {
             <section className="flex lg:flex-row flex-col justify-between items-start">
                 <div className="lg:w-1/3 2xl:mr-16 lg:mr-4 w-full">
                     <button onClick={toggleMenu} className="lg:pointer-events-none font-nunito-black text-xl uppercase cursor-pointer flex flex-row" style={{color: "var(--text-color)"}}>Filters {toggle ? <MdArrowDropUp className="lg:hidden block text-2xl"/> : <MdArrowDropDown className="lg:hidden block text-2xl" /> }</button>
-                        <div className={`${toggle ? "flex h-92 py-4" : "hidden"} lg:flex transition-all duration-300 flex-col rounded-md my-4 shadow-lg pointer-events-none`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
+                        <div className={`${toggle ? "flex h-92 py-4" : "hidden"} lg:flex transition-all duration-300 flex-col rounded-md my-4 shadow-lg`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
                             <div className="flex flex-col mx-4 my-2">
                                 <p className="mr-4 mt-1 font-inter-semibold">Manufacturer: </p>
                                 <Select
                                     getOptionLabel={option => option.name}
                                     getOptionValue={option => option.id}
                                     options={manufacturers}
-                                    instanceId="Manufacturer"
+                                    instanceId="Manufacturers"
                                     placeholder=""
                                     isClearable
                                     isMulti
                                     menuIsOpen
                                     hideSelectedOptions={false}
-                                    onChange={values => setProfileId(values ? values.map(value => value.id) : null)}
                                     className="font-inter-regular"
+                                    onChange={values => setManuId(values ? values.map(value => value.id) : null)}
                                     styles={selectTheme}
                                 />
                             </div>
