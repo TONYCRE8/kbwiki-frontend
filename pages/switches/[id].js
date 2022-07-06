@@ -55,7 +55,7 @@ const ID = ({_switch}) => {
                     <hr></hr>
                     <div className="flex justify-center md:flex-row flex-col mt-8">
                         <div>
-                            <Image className="rounded-lg w-1/2 bg-white" width={500} height={500} src={`${process.env.REACT_APP_STRAPI_API}${s.thumb.formats.small.url}`} />
+                            <Image className="rounded-lg w-1/2 bg-white" width={500} height={500} src={`${s.thumb.formats.medium.url}`} />
                         </div>
                         <div className="md:w-1/2 md:max-w-md w-full md:ml-4">
                             <div className="rounded-lg p-4 mb-4" style={{background: "var(--bg-accent)"}}>

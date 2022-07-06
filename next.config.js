@@ -4,6 +4,6 @@ module.exports = {
     REACT_APP_STRAPI_API: process.env.REACT_APP_STRAPI_API
   },
   images: {
-    domains: ['localhost']
+    domains: ['res.cloudinary.com']
   }
 }

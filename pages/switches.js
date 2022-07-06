@@ -157,7 +157,7 @@ export default function Switches ({allSwitches}) {
             {status === "success" && data.map((s) => (
               <Link href={`/switches/${s.slug}`} key={s.slug} id={s.id}>
                   <div className="flex flex-row justify-between w-80 h-32 border-r-8 rounded-md cursor-pointer m-4 shadow-lg transition transform duration-150 hover:-translate-y-1" style={{borderColor: "var(--primary-color)"}}>
-                    <Image className="rounded-lg" width={128} height={128} src={`${process.env.REACT_APP_STRAPI_API}${s.thumb.formats.thumbnail.url}`} />
+                    <Image className="rounded-lg" width={128} height={128} src={`${s.thumb.formats.thumbnail.url}`} />
                     <div className="flex flex-col mx-4 text-right justify-between h-full pb-2">
                       <h2 className="text-2xl">{s.name}</h2>
                       <p className="font-inter-thin leading-4 capitalize">{s.type.name}<br/>

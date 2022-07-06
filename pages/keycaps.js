@@ -208,7 +208,7 @@ export default function Keycaps ({allKeycaps}) {
                         {status === "success" && data.map((s) => (
                             <Link href={`/keycaps/${s.slug}`} key={s.id}>
                                 <div className="w-72 2xl:m-4 lg:m-1 m-4 rounded-lg cursor-pointer shadow-lg transition transform duration-150 hover:-translate-y-1" style={{background: "var(--bg-accent)"}}>
-                                    <Image className="rounded-t-xl object-cover w-full" width={288} height={72} src={`${process.env.REACT_APP_STRAPI_API}${s.thumb.formats.small.url}`} />
+                                    <Image className="rounded-t-xl object-cover w-full" width={288} height={72} src={`${s.thumb.formats.small.url}`} />
                                     <div className="text-left">
                                         <h2 className="font-nunito-black text-xl leading-6 ml-1 py-1">{s.name}</h2>
                                         <div className="border-l-8 rounded-bl-lg flex justify-between items-end" style={{borderColor: "var(--primary-color)"}}>

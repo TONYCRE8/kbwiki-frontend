@@ -103,7 +103,7 @@ const ID = ({keycap}) => {
                     <hr></hr>
                     <div className="flex md:flex-row justify-center flex-col mt-8">
                         <div>
-                            <Image className="rounded-lg md:w-1/2 w-full bg-white object-cover" width={500} height={240} src={`${process.env.REACT_APP_STRAPI_API}${k.thumb.formats.medium.url}`} />
+                            <Image className="rounded-lg md:w-1/2 w-full bg-white object-cover" width={500} height={240} src={`${k.thumb.formats.medium.url}`} />
                         </div>
                         <div className="md:w-1/2 md:max-w-md w-full md:ml-4">
                             <div className="rounded-lg p-4 mb-4" style={{background: "var(--bg-accent)"}}>
