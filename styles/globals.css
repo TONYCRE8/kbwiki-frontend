@@ -16,8 +16,8 @@
     src: url(../fonts/Inter-Regular.woff2) format('woff2');
   }
   @font-face {
-    font-family: 'inter-thin';
-    src: url(../fonts/Inter-Thin.woff2) format('woff2');
+    font-family: 'inter-light';
+    src: url(../fonts/Inter-Light.woff2) format('woff2');
   }
 }
 
@@ -84,5 +84,5 @@ ul.list-none li::before {
 }
 
 small {
-  @apply font-inter-thin;
+  @apply font-inter-light;
 }

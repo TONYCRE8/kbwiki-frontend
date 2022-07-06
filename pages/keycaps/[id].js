@@ -17,8 +17,6 @@ const ID = ({keycap}) => {
 
     const keycaps = DATA(`keycaps?_slug=${id}`)
 
-    console.log(keycaps)
-
     const [copied, setCopied] = useState(false)
     const urlCopy = useRef(null)
 
@@ -66,9 +64,8 @@ const ID = ({keycap}) => {
         setTimeout(() => {
             setCopied(false)
         }, 1000)
-
-        console.log(k.thumb)
     }
+
     return (
         <Layout>
             <SEO
@@ -95,10 +92,10 @@ const ID = ({keycap}) => {
 
             />
             <>
-                <div className="flex flex-col py-16" key={k.id}>
+                <div className="flex flex-col lg:py-16 py-0" key={k.id}>
                     <div className="flex md:flex-row flex-col-reverse justify-between md:items-end">
                         <h1>{k.name}</h1>
-                        <small>Last edited: {k.updatedAt.slice(0,10)}</small>
+                        <small>Last edited: {k.updatedAt.slice(0,10).replace(/[-]/g, '/')}</small>
                     </div>
                     <hr></hr>
                     <div className="flex md:flex-row justify-center flex-col mt-8">
@@ -106,42 +103,42 @@ const ID = ({keycap}) => {
                             <Image className="rounded-lg md:w-1/2 w-full bg-white object-cover" width={500} height={240} src={`${k.thumb.formats.medium.url}`} />
                         </div>
                         <div className="md:w-1/2 md:max-w-md w-full md:ml-4">
-                            <div className="rounded-lg p-4 mb-4" style={{background: "var(--bg-accent)"}}>
+                            <div className="rounded-lg p-4 mb-4 shadow-lg" style={{background: "var(--bg-accent)"}}>
                                 <section className="mb-2">
                                     <h2 className="text-center text-lg tracking-wider">General Info</h2>
                                     <div className="flex flex-row justify-between">
                                         <p>Manufacturer:</p>
-                                        <p className="font-inter-thin capitalize">{k.manufacturer.name}</p>
+                                        <p className="font-inter-light capitalize">{k.manufacturer.name}</p>
                                     </div>
                                     <div className="flex flex-row justify-between">
                                         <p>Profile:</p>
-                                        <p className="font-inter-thin capitalize">{k.profile.name}</p>
+                                        <p className="font-inter-light capitalize">{k.profile.name}</p>
                                     </div>
                                     <div className="flex flex-row justify-between">
                                         <p>Designer:</p>
-                                        <p className="font-inter-thin capitalize">{k.designer}</p>
+                                        <p className="font-inter-light capitalize">{k.designer}</p>
                                     </div>
                                     <div className="flex flex-row justify-between">
                                         <p>Run:</p>
-                                        <p className="font-inter-thin capitalize text-right">Start: {k.run_start.replace(/-/g, "/")}<br/>
+                                        <p className="font-inter-light capitalize text-right">Start: {k.run_start.replace(/-/g, "/")}<br/>
                                         End: {k.run_end.replace(/-/g, "/")}
                                         </p>
                                     </div>
                                     <div className="flex flex-row justify-between">
                                         <p>Status:</p>
-                                        <p className="font-inter-thin capitalize">{k.status.name.replace("_", " ")}</p>
+                                        <p className="font-inter-light capitalize">{k.status.name.replace("_", " ")}</p>
                                     </div>
                                     {k.status.name != "Completed" && (
                                         <div className="flex flex-row justify-between">
                                             <p>Estimated Completion:</p>
-                                            <p className="font-inter-thin capitalize text-right">{estLead(k)}
+                                            <p className="font-inter-light capitalize text-right">{estLead(k)}
                                             </p>
                                         </div>
                                     )}
                                 </section>
                                 <section className="mb-2">
                                     <h2 className="text-center text-lg tracking-wider">Available kits</h2>
-                                    <ul className="font-inter-thin capitalize">{formatKits(k.kits).map((kit) => (
+                                    <ul className="font-inter-light capitalize">{formatKits(k.kits).map((kit) => (
                                         <li key={kit}>
                                             {kit}
                                         </li>
@@ -150,9 +147,9 @@ const ID = ({keycap}) => {
                             </div>
                             <div className='mb-4'>
                                 <h2 className="text-center text-lg tracking-wider">Colors featured</h2>
-                                <ul className='list-none flex flex-row flex-wrap justify-start'>
+                                <ul className='list-none grid lg:grid-cols-3 grid-cols-2 gap-2'>
                                     {splitColors(k.colors).map((c) => (
-                                        <li className='flex flex-col flex-wrap justify-center align-middle md:w-1/3 w-1/2 rounded-xl overflow-hidden' style={{border: "4px solid var(--bg-color)"}} key={c.name}>
+                                        <li className='flex flex-col flex-wrap justify-center align-middle w-full rounded-xl overflow-hidden'  key={c.name}>
                                             <div className='h-8 w-full mx-auto' style={{background: c.hex}}></div>
                                             {c.name == c.hex ? (
                                                 <div className="text-center p-1" style={{background: "var(--bg-accent)"}}>
@@ -171,8 +168,8 @@ const ID = ({keycap}) => {
                                 </ul>
                             </div>
                             <section className="flex justify-between">
-                                <button onClick={copyURL} className="w-1/2 mr-2 h-8 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--primary-color)"}}>{!copied ? "Share" : "Copied"}</button>
-                                <button className="w-1/2 ml-2 h-8 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--secondary-color)"}}>Edit Article</button>
+                                <button onClick={copyURL} className="w-1/2 mr-2 h-8 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--primary-color)", color: "var(--bg-accent)"}}>{!copied ? "Share" : "Copied"}</button>
+                                <button className="w-1/2 ml-2 h-8 uppercase rounded-xl font-nunito-black text-white" style={{background: "var(--secondary-color)", color: "var(--bg-accent)"}}>Edit Article</button>
                             </section>
                         </div>
                     </div>

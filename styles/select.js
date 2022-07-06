@@ -13,7 +13,7 @@ import {DATA} from "../lib/dataFetch"
 
 const selectTheme = {
     option: (provided, state) => ({
-      color: state.isSelected ? "white" : "var(--bg-color)",
+      color: "var(--bg-color)",
       background: state.isSelected ? `var(--secondary-color)` : "var(--text-color)",
       padding: "4px 8px",
       minWidth: "72px",
@@ -21,10 +21,12 @@ const selectTheme = {
       textAlign: "center",
       borderRadius: 16,
       margin: "2px 4px",
+      fontFamily: state.isSelected ? "inter-semibold" : "inter-regular",
       cursor: "pointer",
       ":active": {
           backgroundColor: "var(--secondary-color)",
-          color: "white"
+          color: "var(--bg-color)",
+          fontFamily: "inter-semibold"
       },
       "@media only screen and (max-width: 1023px)": {
         width: "120px",

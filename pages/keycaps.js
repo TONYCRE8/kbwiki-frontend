@@ -11,13 +11,13 @@ import SkeletonKeycapList from "../components/skeletons/skeletonKeycapList"
 
 import Select from "react-select"
 import {useQuery, useQueryClient} from "react-query"
-import {useState, useEffect} from "react"
+import {useState} from "react"
 import axios from "axios"
 
 import {selectTheme} from "../styles/select"
 
 const getKeycaps = async(key) => {
-    const manuIds = key.queryKey[1].manu.map(id=>`manufacturer.id=${id}`)
+    const manuIds = key.queryKey[1].manu.map(id => `manufacturer.id=${id}`)
     const profileIds = key.queryKey[2].prof.map(id => `profile.id=${id}`)
     const colorIds = key.queryKey[3].col.map(id => `filter_colors.id=${id}`)
     const statIds = key.queryKey[4].stat.map(id => `status.id=${id}`)
@@ -29,7 +29,7 @@ const getKeycaps = async(key) => {
 
     const page = key.queryKey[5].page
 
-    let start = (page * 12) - 12 // set every 10 to 20 when in prod
+    let start = (page * 12) - 12
 
     const data = await axios(`
         ${process.env.REACT_APP_STRAPI_API}/keycaps?${manuQueryString ? manuQueryString + '&' : ''}${profileQueryString ? profileQueryString + '&' : ''}${colorQueryString ? colorQueryString + '&' : ''}${statusQueryString ? statusQueryString + '&' : ''}_start=${start}&_limit=12`)
@@ -116,78 +116,78 @@ export default function Keycaps ({allKeycaps}) {
             <section className="flex lg:flex-row flex-col justify-between items-start">
                 <div className="lg:w-1/3 2xl:mr-16 lg:mr-4 w-full">
                     <button onClick={toggleMenu} className="lg:pointer-events-none font-nunito-black text-xl uppercase cursor-pointer flex flex-row" style={{color: "var(--text-color)"}}>Filters {toggle ? <MdArrowDropUp className="lg:hidden block text-2xl"/> : <MdArrowDropDown className="lg:hidden block text-2xl" /> }</button>
-                        <div className={`${toggle ? "flex h-92 py-4" : "hidden"} lg:flex transition-all duration-300 flex-col rounded-md my-4 shadow-lg`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
-                            <div className="flex flex-col mx-4 my-2">
-                                <p className="mr-4 mt-1 font-inter-semibold">Manufacturer: </p>
-                                <Select
-                                    getOptionLabel={option => option.name}
-                                    getOptionValue={option => option.id}
-                                    options={manufacturers}
-                                    instanceId="Manufacturers"
-                                    placeholder=""
-                                    isClearable
-                                    isMulti
-                                    menuIsOpen
-                                    hideSelectedOptions={false}
-                                    className="font-inter-regular"
-                                    onChange={values => setManuId(values ? values.map(value => value.id) : null)}
-                                    styles={selectTheme}
-                                />
-                            </div>
-                            <div className="flex flex-col mx-4 my-2">
-                                <p className="mr-4 mt-1 font-inter-semibold">Profile: </p>
-                                <Select
-                                    getOptionLabel={option => option.name}
-                                    getOptionValue={option => option.id}
-                                    options={profiles}
-                                    instanceId="Profiles"
-                                    placeholder=""
-                                    isClearable
-                                    isMulti
-                                    menuIsOpen
-                                    hideSelectedOptions={false}
-                                    className="font-inter-regular"
-                                    onChange={values => setProfileId(values ? values.map(value => value.id) : null)}
-                                    styles={selectTheme}
-                                />
-                            </div>
-                            <div className="flex flex-col mx-4 my-2">
-                                <p className="mr-4 mt-1 font-inter-semibold">Color: </p>
-                                <Select
-                                    getOptionLabel={option => option.color}
-                                    getOptionValue={option => option.id}
-                                    options={colors}
-                                    instanceId="Colors"
-                                    placeholder=""
-                                    isClearable
-                                    isMulti
-                                    menuIsOpen
-                                    hideSelectedOptions={false}
-                                    className="font-inter-regular capitalize justify-end"
-                                    onChange={values => setColorId(values ? values.map(value => value.id) : null)}
-                                    styles={selectTheme}
-                                />
-                            </div>
-                            <div className="flex flex-col mx-4 my-2">
-                                <p className="mr-4 mt-1 font-inter-semibold">Status: </p>
-                                <Select
-                                    getOptionLabel={option => option.name}
-                                    getOptionValue={option => option.id}
-                                    options={statuses}
-                                    instanceId="Status"
-                                    placeholder=""
-                                    isClearable
-                                    isMulti
-                                    menuIsOpen
-                                    hideSelectedOptions={false}
-                                    onChange={values => setStatusId(values ? values.map(value => value.id) : null)}
-                                    className="font-inter-regular"
-                                    styles={selectTheme}
-                                />
-                            </div>
+                    <div className={`${toggle ? "flex h-92 py-4" : "hidden"} lg:flex transition-all duration-300 flex-col rounded-md my-4 shadow-lg`} style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
+                        <div className="flex flex-col mx-4 my-2">
+                            <p className="mr-4 mt-1 font-inter-semibold">Manufacturer: </p>
+                            <Select
+                                getOptionLabel={option => option.name}
+                                getOptionValue={option => option.id}
+                                options={manufacturers}
+                                instanceId="Manufacturers"
+                                placeholder=""
+                                isClearable
+                                isMulti
+                                menuIsOpen
+                                hideSelectedOptions={false}
+                                className="font-inter-regular"
+                                onChange={values => setManuId(values ? values.map(value => value.id) : null)}
+                                styles={selectTheme}
+                            />
                         </div>
+                        <div className="flex flex-col mx-4 my-2">
+                            <p className="mr-4 mt-1 font-inter-semibold">Profile: </p>
+                            <Select
+                                getOptionLabel={option => option.name}
+                                getOptionValue={option => option.id}
+                                options={profiles}
+                                instanceId="Profiles"
+                                placeholder=""
+                                isClearable
+                                isMulti
+                                menuIsOpen
+                                hideSelectedOptions={false}
+                                className="font-inter-regular"
+                                onChange={values => setProfileId(values ? values.map(value => value.id) : null)}
+                                styles={selectTheme}
+                            />
+                        </div>
+                        <div className="flex flex-col mx-4 my-2">
+                            <p className="mr-4 mt-1 font-inter-semibold">Color: </p>
+                            <Select
+                                getOptionLabel={option => option.color}
+                                getOptionValue={option => option.id}
+                                options={colors}
+                                instanceId="Colors"
+                                placeholder=""
+                                isClearable
+                                isMulti
+                                menuIsOpen
+                                hideSelectedOptions={false}
+                                className="font-inter-regular capitalize justify-end"
+                                onChange={values => setColorId(values ? values.map(value => value.id) : null)}
+                                styles={selectTheme}
+                            />
+                        </div>
+                        <div className="flex flex-col mx-4 my-2">
+                            <p className="mr-4 mt-1 font-inter-semibold">Status: </p>
+                            <Select
+                                getOptionLabel={option => option.name}
+                                getOptionValue={option => option.id}
+                                options={statuses}
+                                instanceId="Status"
+                                placeholder=""
+                                isClearable
+                                isMulti
+                                menuIsOpen
+                                hideSelectedOptions={false}
+                                onChange={values => setStatusId(values ? values.map(value => value.id) : null)}
+                                className="font-inter-regular"
+                                styles={selectTheme}
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="flex flex-col w-full    ">
+                <div className="flex flex-col w-full">
                     <div className="flex lg:flex-row flex-wrap justify-around items-start">
                         {status === "loading" && (
                             <SkeletonKeycapList />

@@ -7,7 +7,7 @@ module.exports = {
         'nunito-black': ['nunito-black', 'sans-serif'],
         'inter-semibold': ['inter-semibold', 'sans-serif'],
         'inter-regular': ['inter-regular', 'sans-serif'],
-        'inter-thin': ['inter-thin', 'sans-serif']
+        'inter-light': ['inter-light', 'sans-serif']
       },
       colors: {
         gray: {
