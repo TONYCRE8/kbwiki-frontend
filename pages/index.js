@@ -22,7 +22,7 @@ export default function Home() {
       <section className="flex flex-col justify-center md:py-32 py-16">
         <h1 className="text-6xl">Welcome to the kb.wiki Beta</h1>
         <div className="border-l-8 border-solid rounded-bl-md my-2" style={{borderColor: "var(--primary-color)"}}>
-          <p className="text-2xl p-2">A keyboard enthusiast's dream information hub</p>
+          <p className="text-2xl p-2">A keyboard enthusiast&apos;s dream information hub</p>
         </div>
       </section>
       <section>
