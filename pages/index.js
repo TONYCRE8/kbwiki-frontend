@@ -19,7 +19,29 @@ export default function Home() {
 
         />
       </Head>
-      <section className="flex items-center justify-center md:py-32 py-16 md:flex-row flex-col">
+      <section className="flex flex-col justify-center md:py-32 py-16">
+        <h1 className="text-6xl">Welcome to the kb.wiki Beta</h1>
+        <div className="border-l-8 border-solid rounded-bl-md my-2" style={{borderColor: "var(--primary-color)"}}>
+          <p className="text-2xl p-2">A keyboard enthusiast's dream information hub</p>
+        </div>
+      </section>
+      <section>
+        <div className="border-l-8 border-solid rounded-md my-4 h-72 min-h-full" style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
+          <div className="p-2">
+            <h2 className="text-3xl">Keycap Sets</h2>
+            {/* Insert keycaps here */}
+          </div>
+        </div>
+      </section>
+      <section>
+        <div className="border-l-8 border-solid rounded-md my-4 h-72 min-h-full" style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
+          <div className="p-2">
+            <h2 className="text-3xl">Switches</h2>
+            {/* Insert keycaps here */}
+          </div>
+        </div>
+      </section>
+      {/* <section className="flex items-center justify-center md:py-32 py-16 md:flex-row flex-col">
         <div className="w-80">
           <Image src={Logo} alt="Logo"/>
         </div>
@@ -35,57 +57,7 @@ export default function Home() {
               <p className="uppercase text-white font-nunito-black pt-2 text-lg">Join us on Discord!</p>
           </a>
         </div>
-      </section>
-      <hr className="my-16" style={{borderColor: "var(--text-color)"}}></hr>
-      <section className="flex flex-col">
-      </section>
-      <hr className="my-16" style={{borderColor: "var(--text-color)"}}></hr>
-      <section className="flex flex-col">
-        <h2 className="text-4xl md:text-left text-center mb-4">What can I expect to see?</h2>
-        <div className="md:mx-8">
-          <p>The beta will contain a selection of data collected over the months. In this we will aim to provide the following:</p>
-          <div className="border-l-8 border-solid rounded-l-md my-4" style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
-            <ul className="p-4">
-              <li className="mb-2">Data on Switches, from manufacturers like Kalih, Gateron, Cherry, ThicThock and more.</li>
-              <li className="mb-2">Data on Keycap sets, from manufacturers like GMK, JTK, ePBT, and more.</li>
-              <li>The ability to search and filter by parameters such as color, type, profile, actuation, and more.</li>
-            </ul>
-          </div>
-          <p>After the beta has been out for a while and public reception has been gained, we will decide on whether there&apos;s enough support for the full version.<br />
-          In said full version, you can expect to see:</p>
-          <div className="border-l-8 border-solid rounded-l-md my-4" style={{borderColor: "var(--primary-color)", background: "var(--bg-accent)"}}>
-            <ul className="p-4">
-              <li className="mb-2">Data on keyboards, vendors by region (including UK/EU seperation).</li>
-              <li className="mb-2">User accounts where you can submit page edits online (as opposed to edit requests on the Discord server).</li>
-              <li>A bunch of other stuff too!</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      <hr className="my-16" style={{borderColor: "var(--text-color)"}}></hr>
-      <section className="flex flex-col mb-8 justify-center items-center">
-        <h2 className="text-4xl text-center mb-4">What can you do?</h2>
-        <p className="text-center md:w-3/4">
-          There&apos;s a bunch to be done. The best thing you can do is show your support! Join our Discord server, donate to the Ko-Fi if at all possible, and spread word about the project!
-        </p>
-        <p className="text-center md:w-3/4">
-          You can also help on the Discord server by filling in some of the gaps in our database when the beta is out.
-        </p>
-        <div className="flex md:flex-row flex-col md:my-8 my-4 mb-8 justify-evenly items-center w-full">
-          <a href="https://discord.gg/hM9BQ5mmsu" className="md:my-0 my-2 w-80 h-10 flex justify-center rounded-full bg-purple-dark">
-              <div className="w-10 pt-1 mr-10">
-                <Image src={Discord}></Image>
-              </div>
-              <p className="uppercase text-white font-nunito-black pt-2 text-lg">Join us on Discord!</p>
-          </a>
-          <a href="https://ko-fi.com/kbwiki" className="md:my-0 my-2 w-80 h-10 flex justify-center rounded-full bg-green-dark">
-              <div className="w-10 mr-10">
-                <Image src={Kofi}></Image>
-              </div>
-              <p className="uppercase text-white font-nunito-black pt-2 text-lg">Support us on Kofi!</p>
-          </a>
-        </div>
-      </section>
+      </section> */}
     </Layout>
   )
 }
