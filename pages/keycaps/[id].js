@@ -149,7 +149,7 @@ const ID = ({keycap}) => {
                                 <h2 className="text-center text-lg tracking-wider">Colors featured</h2>
                                 <ul className='list-none grid lg:grid-cols-3 grid-cols-2 gap-2'>
                                     {splitColors(k.colors).map((c) => (
-                                        <li className='flex flex-col flex-wrap justify-center align-middle w-full rounded-xl overflow-hidden'  key={c.name}>
+                                        <li className='flex flex-col flex-wrap justify-center align-middle w-full rounded-xl overflow-hidden' style={{border: '2px solid var(--bg-accent)'}}  key={c.name}>
                                             <div className='h-8 w-full mx-auto' style={{background: c.hex}}></div>
                                             {c.name == c.hex ? (
                                                 <div className="text-center p-1" style={{background: "var(--bg-accent)"}}>

@@ -129,7 +129,7 @@ export default function Keycaps ({allKeycaps}) {
                                 isMulti
                                 menuIsOpen
                                 hideSelectedOptions={false}
-                                className="font-inter-regular"
+                                className="font-inter-regular justify-end"
                                 onChange={values => setManuId(values ? values.map(value => value.id) : null)}
                                 styles={selectTheme}
                             />
@@ -146,7 +146,7 @@ export default function Keycaps ({allKeycaps}) {
                                 isMulti
                                 menuIsOpen
                                 hideSelectedOptions={false}
-                                className="font-inter-regular"
+                                className="font-inter-regular justify-end"
                                 onChange={values => setProfileId(values ? values.map(value => value.id) : null)}
                                 styles={selectTheme}
                             />
@@ -181,7 +181,7 @@ export default function Keycaps ({allKeycaps}) {
                                 menuIsOpen
                                 hideSelectedOptions={false}
                                 onChange={values => setStatusId(values ? values.map(value => value.id) : null)}
-                                className="font-inter-regular"
+                                className="font-inter-regular justify-end"
                                 styles={selectTheme}
                             />
                         </div>
