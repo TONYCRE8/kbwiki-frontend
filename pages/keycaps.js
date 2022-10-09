@@ -37,13 +37,9 @@ const getKeycaps = async(key) => {
 }
 
 export default function Keycaps ({allKeycaps}) {
-
     const router = useRouter()
-
     const pageToggle = (dir) => {
-    
         let pageNo = router.query.page == null ? 1 : router.query.page
-    
         if (dir == 'next') {
             if (data.length == 12) {
                 pageNo++
@@ -57,7 +53,6 @@ export default function Keycaps ({allKeycaps}) {
             }
             setNextDisabled(false)
         }
-
         router.push(
             {
                 pathname: '/keycaps',

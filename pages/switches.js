@@ -36,13 +36,9 @@ const getSwitches = async(key) => {
 }
 
 export default function Switches ({allSwitches}) {
-
     const router = useRouter()
-
     const pageToggle = (dir) => {
-    
         let pageNo = router.query.page == null ? 1 : router.query.page
-    
         if (dir == 'next') {
             if (data.length == 12) {
                 pageNo++
@@ -56,7 +52,6 @@ export default function Switches ({allSwitches}) {
             }
             setNextDisabled(false)
         }
-
         router.push(
             {
                 pathname: '/switches',
