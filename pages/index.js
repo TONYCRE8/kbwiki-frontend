@@ -9,8 +9,6 @@ import { DATA } from "../lib/dataFetch"
 import Logo from "../public/logo-beta.svg"
 import Discord from "../public/discord.svg"
 import Kofi from "../public/kofi.svg"
-import keycapIcon from "../public/keycap.svg"
-import switchIcon from "../public/switch.svg"
 
 export default function Home() {
 
@@ -84,10 +82,7 @@ export default function Home() {
         <div className="rounded-md my-4 h-72 min-h-full">
           <div className="p-2">
             <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <h2 className="font-nunito-black text-3xl">Switches</h2>
-
-              </div>
+              <h2 className="font-nunito-black text-3xl">Switches</h2>
               <Link href="/switches">
                 <div className="w-40 rounded-lg p-2 font-nunito-black cursor-pointer text-center" style={{background: "var(--secondary-color)", color: "var(--bg-color)"}}>
                   View All Switches
