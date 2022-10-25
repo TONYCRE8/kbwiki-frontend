@@ -171,14 +171,20 @@ export default function Switches ({allSwitches}) {
                     )}
                     {status === "success" && data.map((s) => (
                     <Link href={`/switches/${s.slug}`} key={s.slug} id={s.id}>
-                        <div className="flex flex-row justify-between w-80 h-32 border-r-8 rounded-md cursor-pointer m-4 shadow-lg transition transform duration-150 hover:-translate-y-1" style={{borderColor: "var(--primary-color)"}}>
-                            <Image className="rounded-lg object-cover" width={128} height={128} src={`${s.thumb.formats.medium.url}`} />
-                            <div className="flex flex-col mx-4 text-right justify-between h-full pb-2">
-                            <h2 className="text-2xl">{s.name}</h2>
-                            <p className="font-inter-thin leading-4 capitalize">{s.type.name}<br/>
-                            {s.manufacturer.name}<br/>
-                            {s.actuation}g
-                            </p>
+                        <div className="flex flex-row justify-between w-72 h-32 2xl:m-4 lg:m-1 m-4 rounded-lg cursor-pointer shadow-lg transition transform duration-150 hover:-translate-y-1" style={{background: "var(--bg-accent)"}}>
+                            <div className="h-full w-32">
+                                <Image className="rounded-lg object-cover" width={128} height={128} src={`${s.thumb.formats.medium.url}`} />
+                            </div>
+                            <div className="flex flex-col text-right justify-between h-full">
+                                <div className="flex flex-col justify-center h-full text-right">
+                                <h2 className="font-nunito-black text-xl mr-1 py-1">{s.name}</h2>
+                                </div>
+                                <div className="border-r-8 rounded-br-lg items-end" style={{borderColor: "var(--primary-color)"}}>
+                                <p className="mr-2 py-2 text-sm font-inter-thin leading-4 capitalize">{s.type.name} switch<br/>
+                                {s.manufacturer.name}<br/>
+                                {s.actuation}g
+                                </p>
+                                </div>
                             </div>
                         </div>
                     </Link>

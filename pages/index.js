@@ -9,6 +9,8 @@ import { DATA } from "../lib/dataFetch"
 import Logo from "../public/logo-beta.svg"
 import Discord from "../public/discord.svg"
 import Kofi from "../public/kofi.svg"
+import KeycapIcon from "../public/keycap"
+import SwitchIcon from "../public/switch"
 
 export default function Home() {
 
@@ -43,10 +45,12 @@ export default function Home() {
       </section>
       <hr></hr>
       <section>
-        <div className="rounded-md my-4 h-72 min-h-full">
-          <div className="p-2">
-            <div className="flex justify-between items-center">
+        <div className="my-4 min-h-full">
+        <div className="flex justify-between items-center">
               <div className="flex items-center">
+                <div className="flex items-center justify-center rounded-lg mr-4 p-2" style={{background: "var(--primary-color)"}}>
+                  <KeycapIcon className="w-12 h-12" style={{fill: "var(--bg-color)"}} />
+                </div>
                 <h2 className="font-nunito-black text-3xl">Keycap Sets</h2>
               </div>
               <Link href="/keycaps">
@@ -75,14 +79,17 @@ export default function Home() {
               </Link>
             ))}
             </div>
-          </div>
         </div>
       </section>
       <section>
-        <div className="rounded-md my-4 h-72 min-h-full">
-          <div className="p-2">
-            <div className="flex justify-between items-center">
-              <h2 className="font-nunito-black text-3xl">Switches</h2>
+        <div className="my-4 min-h-full">
+        <div className="flex justify-between items-center">
+              <div className="flex items-center">
+                <div className="flex items-center justify-center rounded-lg mr-4 p-2" style={{background: "var(--primary-color)"}}>
+                  <SwitchIcon className="w-12 h-12" style={{fill: "var(--bg-color)"}} />
+                </div>
+                <h2 className="font-nunito-black text-3xl">Switches</h2>
+              </div>
               <Link href="/switches">
                 <div className="w-40 rounded-lg p-2 font-nunito-black cursor-pointer text-center" style={{background: "var(--secondary-color)", color: "var(--bg-color)"}}>
                   View All Switches
@@ -92,21 +99,36 @@ export default function Home() {
             <div className="flex flex-row justify-between">
             {switches.map((s) => (
               <Link href={`/switches/${s.slug}`} key={s.slug} id={s.id}>
-                  <div className="flex flex-row justify-between w-80 h-32 border-r-8 rounded-md cursor-pointer m-4 shadow-lg transition transform duration-150 hover:-translate-y-1" style={{borderColor: "var(--primary-color)"}}>
-                      <Image className="rounded-lg object-cover" width={128} height={128} src={`${s.thumb.formats.medium.url}`} />
-                      <div className="flex flex-col mx-4 text-right justify-between h-full pb-2">
-                      <h2 className="text-2xl">{s.name}</h2>
-                      <p className="font-inter-thin leading-4 capitalize">{s.type.name}<br/>
-                      {s.manufacturer.name}<br/>
-                      {s.actuation}g
-                      </p>
+                  <div className="flex flex-row justify-between w-72 h-32 2xl:m-4 lg:m-1 m-4 rounded-lg cursor-pointer shadow-lg transition transform duration-150 hover:-translate-y-1" style={{background: "var(--bg-accent)"}}>
+                      <div className="h-full w-32">
+                        <Image className="rounded-lg object-cover" width={128} height={128} src={`${s.thumb.formats.medium.url}`} />
+                      </div>
+                      <div className="flex flex-col text-right justify-between h-full">
+                        <div className="flex flex-col justify-center h-full text-right">
+                          <h2 className="font-nunito-black text-xl mr-1 py-1">{s.name}</h2>
+                        </div>
+                        <div className="border-r-8 rounded-br-lg items-end" style={{borderColor: "var(--primary-color)"}}>
+                          <p className="mr-2 py-2 text-sm font-inter-thin leading-4 capitalize">{s.type.name} switch<br/>
+                          {s.manufacturer.name}<br/>
+                          {s.actuation}g
+                          </p>
+                        </div>
                       </div>
                   </div>
               </Link>
             ))}
             </div>
-          </div>
         </div>
+      </section>
+      <hr></hr>
+      <section>
+
+        <a href="https://discord.gg/hM9BQ5mmsu" className="w-80 h-10 mt-16 flex justify-center rounded-full bg-purple-dark">
+            <div className="w-10 pt-1 mr-10">
+              <Image src={Discord}></Image>
+            </div>
+            <p className="uppercase text-white font-nunito-black pt-2 text-lg">Join us on Discord!</p>
+        </a>
       </section>
       {/* <section className="flex items-center justify-center md:py-32 py-16 md:flex-row flex-col">
         <div className="w-80">
