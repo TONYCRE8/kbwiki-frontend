@@ -37,29 +37,29 @@ export default function Home() {
         keywords={['kb wiki', 'mechanical keyboard', 'mechanical keyboard wiki', 'keyboard wiki']}  
 
       />
-      <section className="flex flex-col justify-center md:py-32 py-16">
-        <h1 className="text-6xl">Welcome to the kb.wiki Beta</h1>
+      <section className="flex flex-col justify-center md:py-32 py-0 pt-20 pb-64">
+        <h1 className="md:text-6xl text-4xl">Welcome to the kb.wiki Beta</h1>
         <div className="border-l-8 border-solid rounded-bl-md my-2" style={{borderColor: "var(--primary-color)"}}>
-          <p className="text-2xl p-2">A keyboard enthusiast&apos;s dream information hub</p>
+          <p className="md:text-2xl text-lg p-2">A keyboard enthusiast&apos;s dream information hub</p>
         </div>
       </section>
       <hr></hr>
       <section>
         <div className="my-4 min-h-full">
-        <div className="flex justify-between items-center">
-              <div className="flex items-center">
+        <div className="flex justify-between items-center md:flex-row flex-col">
+              <div className="flex items-center md:justify-center justify-start md:w-auto w-full">
                 <div className="flex items-center justify-center rounded-lg mr-4 p-2" style={{background: "var(--primary-color)"}}>
                   <KeycapIcon className="w-12 h-12" style={{fill: "var(--bg-color)"}} />
                 </div>
-                <h2 className="font-nunito-black text-3xl">Keycap Sets</h2>
+                <h2 className="font-nunito-black md:text-3xl text-2xl">Keycap Sets</h2>
               </div>
               <Link href="/keycaps">
-                <div className="w-40 rounded-lg p-2 font-nunito-black cursor-pointer text-center" style={{background: "var(--secondary-color)", color: "var(--bg-color)"}}>
+                <div className="md:w-40 w-full md:mt-0 mt-2 rounded-lg p-2 font-nunito-black cursor-pointer text-center" style={{background: "var(--secondary-color)", color: "var(--bg-color)"}}>
                   View All Keycaps
                 </div>
               </Link>
             </div>
-            <div className="flex flex-row justify-between">
+            <div className="flex md:flex-row flex-col justify-between">
             {keycaps.map((s) => (
               <Link href={`/keycaps/${s.slug}`} key={s.id}>
                   <div className="w-72 2xl:m-4 lg:m-1 m-4 rounded-lg cursor-pointer shadow-lg transition transform duration-150 hover:-translate-y-1" style={{background: "var(--bg-accent)"}}>
@@ -83,15 +83,15 @@ export default function Home() {
       </section>
       <section>
         <div className="my-4 min-h-full">
-        <div className="flex justify-between items-center">
-              <div className="flex items-center">
+        <div className="flex justify-between items-center md:flex-row flex-col">
+              <div className="flex items-center md:justify-center justify-start md:w-auto w-full">
                 <div className="flex items-center justify-center rounded-lg mr-4 p-2" style={{background: "var(--primary-color)"}}>
                   <SwitchIcon className="w-12 h-12" style={{fill: "var(--bg-color)"}} />
                 </div>
-                <h2 className="font-nunito-black text-3xl">Switches</h2>
+                <h2 className="font-nunito-black md:text-3xl text-2xl">Switches</h2>
               </div>
               <Link href="/switches">
-                <div className="w-40 rounded-lg p-2 font-nunito-black cursor-pointer text-center" style={{background: "var(--secondary-color)", color: "var(--bg-color)"}}>
+                <div className="md:w-40 w-full md:mt-0 mt-2 rounded-lg p-2 font-nunito-black cursor-pointer text-center" style={{background: "var(--secondary-color)", color: "var(--bg-color)"}}>
                   View All Switches
                 </div>
               </Link>
