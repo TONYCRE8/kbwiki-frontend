@@ -5,6 +5,7 @@ import Layout from "../components/layout/layout"
 import SEO from "../components/layout/seo"
 import Link from "next/link"
 import { DATA } from "../lib/dataFetch"
+import { getAllKeycaps, getAllSwitches } from "../lib/api"
 
 import Logo from "../public/logo-beta.svg"
 import Discord from "../public/discord.svg"
@@ -12,10 +13,10 @@ import Kofi from "../public/kofi.svg"
 import KeycapIcon from "../public/keycap"
 import SwitchIcon from "../public/switch"
 
-export default function Home() {
+export default function Home({allKeycaps, allSwitches}) {
 
-  const keycaps = DATA('keycaps?_sort=updatedAt%3Adesc&_limit=4').data;
-  const switches = DATA('switches?_sort=updatedAt%3Adesc&_limit=4').data;
+  const keycaps = allKeycaps.keycaps.slice(0, 3);
+  const switches = allSwitches.switches.slice(0, 3);
   
   const estLead = (data) => {
       var date = data.run_end
@@ -149,4 +150,13 @@ export default function Home() {
       </section> */}
     </Layout>
   )
+}
+
+export async function getStaticProps() {
+  const allKeycaps = (await getAllKeycaps() || 'Error')
+  const allSwitches = (await getAllSwitches() || 'Error')
+  return {
+      props: { allKeycaps, allSwitches },
+      revalidate: 3600
+  }
 }
