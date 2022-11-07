@@ -15,8 +15,8 @@ import SwitchIcon from "../public/switch"
 
 export default function Home({allKeycaps, allSwitches}) {
 
-  const keycaps = allKeycaps.keycaps.slice(0, 3);
-  const switches = allSwitches.switches.slice(0, 3);
+  const keycaps = allKeycaps.keycaps;
+  const switches = allSwitches.switches;
   
   const estLead = (data) => {
       var date = data.run_end
